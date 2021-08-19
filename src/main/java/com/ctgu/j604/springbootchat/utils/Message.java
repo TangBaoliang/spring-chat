@@ -5,6 +5,9 @@ import java.util.Date;
 
 public class Message {
     private Integer msgTypeCode;
+    private String toUserNum;
+    private String message;
+    private Date sendTime;
 
     public Integer getMsgTypeCode() {
         return msgTypeCode;
@@ -13,10 +16,6 @@ public class Message {
     public void setMsgTypeCode(Integer msgTypeCode) {
         this.msgTypeCode = msgTypeCode;
     }
-
-    private String toUserNum;
-    private String message;
-    private Date sendTime;
 
     public Date getSendTime() {
         return sendTime;

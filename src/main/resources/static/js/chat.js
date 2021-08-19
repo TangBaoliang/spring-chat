@@ -27,6 +27,7 @@ $(document).ready(function (){
     let ws = new WebSocket("ws://"+serverPath+"/chat")
     /*begin*********************绑定webSocket事件************************/
 
+
     //1.绑定连接建立后触发的事件
     ws.onopen=function (){
 
@@ -47,6 +48,7 @@ $(document).ready(function (){
             if(res["fromUserNum"]===curChatUserNum){
                 $(".message-item-box").append(preBubbleBoxOthers+res["message"]+tailBubbleBox)
                 localStorageAppend(curChatUserNum,preBubbleBoxOthers+res["message"]+tailBubbleBox);
+                sendReadConfirm();
             }
             else{
                 let str = "[data-userNum='"+res['fromUserNum']+"']";

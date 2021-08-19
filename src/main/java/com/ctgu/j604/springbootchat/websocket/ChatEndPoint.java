@@ -36,6 +36,7 @@ public class ChatEndPoint {
     @Autowired public void setChatService(MessageService messageService) {
         ChatEndPoint.messageService = messageService;
     }
+
     //用来存储每一个客户端对象对应的ChatEndPoint对象,一般通过能唯一表示客户的字段做键名
     //ConcurrentHashMap主要是为了解决线程安全问题，其他与普通的HashMap没有什么区别
     public static Map<String, ChatEndPoint> onlineUserPoint = new ConcurrentHashMap<>();

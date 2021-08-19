@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Date;
 
 public class MessageUtils {
-    public static String getMessage(Integer typeCode, String fromUserNum, Object message, Date sendTime){
+    public static String getMessage(Integer typeCode, String fromUserNum, Object message, Date sendTime, String fromMemberNum){
         try{
             ResultMessage resultMessage = new ResultMessage();
             resultMessage.setMsgTypeCode(typeCode);

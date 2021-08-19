@@ -53,7 +53,7 @@ public class MessageServiceImpl implements MessageService {
 
         ChatEndPoint objectChatEndPoint = ChatEndPoint.onlineUserPoint.get(toUserNum);
         if(objectChatEndPoint!=null){
-           String resultMessage = MessageUtils.getMessage(2,fromUserNum,message.getMessage(),message.getSendTime());
+           String resultMessage = MessageUtils.getMessage(2,fromUserNum,message.getMessage(),message.getSendTime(),null);
             try {
                 objectChatEndPoint.getSession().getBasicRemote().sendText(resultMessage);
             } catch (IOException e) {
@@ -71,7 +71,7 @@ public class MessageServiceImpl implements MessageService {
         if(list!=null && list.size()>0){
             for (UnreadMessage u:
                  list) {
-                String msg = MessageUtils.getMessage(u.getMsgTypeCode(),u.getFromUserNum(),u.getContent(),u.getSendTime());
+                String msg = MessageUtils.getMessage(u.getMsgTypeCode(),u.getFromUserNum(),u.getContent(),u.getSendTime(),null);
                 try {
                     chatEndPoint.getSession().getBasicRemote().sendText(msg);
                 } catch (IOException e) {
