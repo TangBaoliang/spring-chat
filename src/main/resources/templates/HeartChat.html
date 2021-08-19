@@ -19,14 +19,14 @@
 				<input id="link-search" type="text" placeholder="输入好友或群聊名称">
 			</div>
 			<div class="links-box beautiful-scrollbar">
-				<div th:each="firend:${friendListInfoList}" th:data-userNum="*{firend.userNum}" class="friend-items" th:title="*{firend.commentForFriend+'('+firend.nickName+')'}"><img draggable="false" src="/img/others.png">
+				<div th:each="firend:${friendListInfoList}" th:data-Num="*{firend.userNum}" th:data-userNum="*{firend.userNum}" class="friend-items" th:title="*{firend.commentForFriend+'('+firend.nickName+')'}"><img draggable="false" src="/img/others.png">
 					<div class="link-info">
 						<p class="friend-comment-p" th:text="*{firend.commentForFriend}">这里显示好友备注</p>
 						<p class="nickname-p" th:text="*{firend.nickName}">这里显示好友昵称</p>
 					</div>
 					<div class="message-count"></div>
 				</div>
-				<div th:each="group:${groupAndUserList}" th:data-groupId="*{group.groupId}" class="group-items" th:title="*{group.groupName+'('+group.groupNum+')'}"><img draggable="false" src="/img/others.png">
+				<div th:each="group:${groupAndUserList}" th:data-Num="*{group.groupNum}" th:data-groupNum="*{group.groupNum}" class="group-items" th:title="*{group.groupName+'('+group.groupNum+')'}"><img draggable="false" src="/img/others.png">
 					<div class="link-info">
 						<p class="friend-comment-p" th:text="*{group.groupName}">这里显示群名称</p>
 						<p class="nickname-p" th:text="*{group.groupNum}">这里显示群号码</p>
