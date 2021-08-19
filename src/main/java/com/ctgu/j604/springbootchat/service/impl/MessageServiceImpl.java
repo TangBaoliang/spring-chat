@@ -45,27 +45,44 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public void sendMessageOneToGroup(ChatEndPoint chatEndPoint, Message message) {
+
+        //提取发送此群消息的成员的账号和id
         String fromUserNum = (String)chatEndPoint.getHttpSession().getAttribute("userNum");
         Integer fromUserId = (Integer) chatEndPoint.getHttpSession().getAttribute("curUserId");
+
+        //提取消息隶属的群的群号
         String groupNum = message.getToUserNum();
 
-        //获取群内的所有成员
+        //获取群内的所有成员的账号
         List<String> groupAndUserList = groupService.getAllUsersByGroupNum(groupNum);
+
+        //分发群消息
         for(int i = 0; i < groupAndUserList.size(); i++){
             //获取群成员
             String toUserNum = groupAndUserList.get(i);
             //发送人不能接受到自己的消息
             if(toUserNum.equals(fromUserNum)) continue;
-            //设置未读消息
+
+            /***********************start将消息封装存到未读消息，给每一个成员都加一条未读消息************************/
             UnreadMessage unreadMessage = new UnreadMessage();
             unreadMessage.setSendTime(message.getSendTime());
             unreadMessage.setContent(message.getMessage());
             unreadMessage.setFromUserId(fromUserId);
+
+            //将此消息的发送号码设为发起此消息的成员账号，以便于前端
             unreadMessage.setFromMemberNum(fromUserNum);
+
+            //将发送方转化为群号，这样方便前端接收
             unreadMessage.setFromUserNum(groupNum);   //发送方群号
+
+            //设置未读消息的接收人账号
             unreadMessage.setToUserNum(toUserNum);
+
             unreadMessage.setMsgTypeCode(4);
+
+            //将此未读消息存到数据库，如果用户没有读，就不会删除，如果读了就会删除自己对应的那一条
             unreadMessageMapper.insert(unreadMessage);
+            /***********************end将消息封装存到未读消息，给每一个成员都加一条未读消息************************/
 
             ChatEndPoint objectChatEndPoint = ChatEndPoint.onlineUserPoint.get(toUserNum);
             if(objectChatEndPoint != null){

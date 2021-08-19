@@ -11,6 +11,7 @@ let preBubbleBoxSelf = '<div class="bubble-box-self clearfix"><img src="img/02.j
 let tailBubbleBox='</pre></div></div>';
 let preBubbleBoxOthers = '<div class="bubble-box-others clearfix"><img src="img/02.jpg"> <div class="bubble"><pre>';
 let chatType='';
+let ifEnterKeyCanSend = true; //回车键弹起是否能够发送，主要是让Ctrl+key按下产生换行后阻止回车键弹起发送消息的事件
 
 let curChatUserNum='';
 $(document).ready(function (){
@@ -144,6 +145,24 @@ $(document).ready(function (){
             $(".message-item-box").append(preBubbleBoxSelf+preMsg+tailBubbleBox);
             localStorageAppend(curChatUserNum,preBubbleBoxSelf+preMsg+tailBubbleBox)
         }
+    })
+
+    //回车键弹起发送消息
+    $("#pre-send-txt").keyup(function (event){
+        if(event.keyCode===13 && ifEnterKeyCanSend){
+            $("#send-btn").click();
+        }
+        ifEnterKeyCanSend=true;
+    })
+
+    //ctrl和回车键按下后换行
+    $("#pre-send-txt").keydown(function (event){
+        if(event.keyCode===13 && event.ctrlKey){
+            let txt = $("#pre-send-txt").val();
+            $("#pre-send-txt").val(txt+"\n");
+            ifEnterKeyCanSend=false;
+        }
+
     })
     function sendReadConfirm(){
 
