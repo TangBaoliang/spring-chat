@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../css/heartChat.css"/>
+	<link rel="icon" href="../img/chat-icon.png" type="image/x-icon">
+	<title>知聊，畅聊心天地</title>
+</head>
+<body>
+	<div class="window">
+		<div class="home-part"></div>
+		<div class="link-list-part">
+			<div class="list-header">
+				<div id="my-head-box">
+					<img id="my-chat-head" src="/img/self.png">
+					<p id="my-nickname" th:text="*{curUser.nickName}">这里显示昵称</p>
+					<p id="my-userNum" th:text="*{curUser.userNum}">这里显示账号</p>
+				</div>
+				<input id="link-search" type="text" placeholder="输入好友或群聊名称">
+			</div>
+			<div class="links-box beautiful-scrollbar">
+				<div th:each="firend:${friendListInfoList}" th:data-userNum="*{firend.userNum}" class="friend-items" th:title="*{firend.commentForFriend+'('+firend.nickName+')'}"><img draggable="false" src="/img/others.png">
+					<div class="link-info">
+						<p class="friend-comment-p" th:text="*{firend.commentForFriend}">这里显示好友备注</p>
+						<p class="nickname-p" th:text="*{firend.nickName}">这里显示好友昵称</p>
+					</div>
+					<div class="message-count"></div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="message-part">
+
+			<div class="message-box-header">
+				<p id="chat-box-title"></p>
+				<p id="current-link-status"></p>
+			</div>
+			<div class="message-item-box beautiful-scrollbar">
+
+
+			</div>
+			<div class="message-input-box">
+				<textarea autofocus id="pre-send-txt"></textarea>
+				<div id="btn-box">
+					<button id="close-btn">关闭</button>
+					<button id="send-btn">发送</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--	<input type="hidden" id="contex" th:value="${#httpServletRequest.getContextPath()}">-->
+	<script src="/js/jquery-3.6.0.js"></script>
+	<script src="/js/chat.js"></script>
+</body>
+</html>

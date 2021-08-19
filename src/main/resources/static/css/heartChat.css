@@ -1,0 +1,337 @@
+.clearfix::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+*{
+    user-select: none;
+}
+.beautiful-scrollbar{
+    scrollbar-arrow-color: #f4ae21; /**//*三角箭头的颜色*/
+    scrollbar-face-color: #333; /**//*立体滚动条的颜色*/
+    scrollbar-3dlight-color: #666; /**//*立体滚动条亮边的颜色*/
+    scrollbar-highlight-color: #666; /**//*滚动条空白部分的颜色*/
+    scrollbar-shadow-color: #999; /**//*立体滚动条阴影的颜色*/
+    scrollbar-darkshadow-color: #666; /**//*立体滚动条强阴影的颜色*/
+    scrollbar-track-color: #666; /**//*立体滚动条背景颜色*/
+    scrollbar-base-color:#273fff;; /**//*滚动条的基本颜色*/
+}
+.beautiful-scrollbar::-webkit-scrollbar{
+    width:2px;
+    height:0;
+}
+.beautiful-scrollbar::-webkit-scrollbar-track{
+    background: #f6f6f6;
+    border-radius:2px;
+}
+.beautiful-scrollbar::-webkit-scrollbar-thumb{
+    background: #aaa;
+    border-radius:2px;
+}
+.beautiful-scrollbar::-webkit-scrollbar-thumb:hover{
+    background: #747474;
+}
+.beautiful-scrollbar::-webkit-scrollbar-corner {
+    background: #f6f6f6;
+}
+p{
+    margin: 0;
+}
+html{
+    height: 100%;
+    width: 100%;
+}
+body{
+    margin:0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    min-width: 500px;
+}
+
+.window{
+    top:0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+}
+.window > div{
+    height: 100%;
+}
+
+.home-part{
+    z-index: 99;
+    position: fixed;
+    float: left;
+    width: 55px;
+    background-color: #007b40;
+}
+
+
+.link-list-part{
+    resize: horizontal;
+    float: left;
+    width: 35%;
+    padding-left: 55px;
+    background-color: white;
+    box-sizing: border-box;
+    position: relative;
+    border-right: #106EBD 1px solid;
+}
+.message-part{
+    position: relative;
+    float: left;
+    width: 65%;
+    background: 0 0 url('../img/01.jpg') no-repeat;
+    background-size: cover;
+}
+
+.list-header{
+    padding-left: 55px;
+    box-sizing: border-box;
+    z-index: 98;
+    left: 0;
+    width: 100%;
+    background-color: #d6ecff;
+    position: absolute;
+    height: 180px;
+    top: 0;
+}
+.list-header img{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-left: 30px;
+    vertical-align: bottom;
+    float: left;
+}
+#my-head-box{
+    width: 80%;
+    height: 90px;
+    padding-top: 20px;
+    box-sizing: border-box;
+    margin:0 0 59px 0;
+    overflow: hidden;
+}
+.list-header p{
+    margin: 0;
+    font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.list-header p:nth-of-type(1){
+    margin-top: 10px;
+}
+.list-header input{
+    display: block;
+    height: 30px;
+    width: 100%;
+    outline: none;
+    border:none;
+    box-sizing: border-box;
+}
+.links-box{
+    padding-top: 180px;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+
+}
+
+
+
+.friend-items,.group-items{
+    width: 100%;
+    height: 70px;
+    border-bottom: 1px solid #cbcbcb;
+    box-sizing: border-box;
+    margin-left: 3px;
+    margin-bottom: 1px;
+    border-left: 5px solid transparent;
+    position: relative;
+}
+.message-count{
+
+    float: right;
+    height: 24px;
+    width: 24px;
+    color: white;
+    background-color: red;
+    margin-top: 24px;
+    margin-right:20px;
+    line-height: 24px;
+    text-align: center;
+    font-size: 13px;
+    border-top-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    display: none;
+}
+
+
+.friend-items:hover,.group-items:hover{
+    background-color: #eeecec;
+    border-left: 5px solid blue;
+}
+
+.message-box-header{
+    width: 100%;
+    height: 8%;
+    background-color: rgb(220, 236, 248);
+}
+.message-item-box{
+    height: 60%;
+    overflow: auto;
+}
+.message-input-box{
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 30%;
+    min-height: 190px;
+    position: absolute;
+    bottom: 0;
+    overflow: auto;
+}
+textarea{
+    font-family: "Microsoft YaHei UI", serif;
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    box-sizing: border-box;
+    border:none;
+    font-size: 16px;
+    width: 100%;
+    height: 65%;
+    outline: none;
+    resize: none;
+    margin: 8px 0 8px 0;
+}
+#btn-box{
+    padding-right: 10px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    min-height: 40px;
+    box-sizing: border-box;
+    padding-bottom: 10px;
+}
+div>button{
+    float: left;
+    width: 80px;
+    font-family: "Microsoft YaHei UI", serif;
+    font-size: 15px;
+    font-weight:lighter;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    height: 30px;
+    margin-left: 20px;
+    background-color: #2d9bff;
+    cursor: pointer;
+}
+.friend-items>img,.group-items>img{
+    float: left;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 10px 10px 10px 10px;
+}
+.link-info{
+    margin: 15px 0 15px 70px;
+    position: absolute;
+    height: 40px;
+    overflow: hidden;
+}
+.link-info>p{
+    margin: 0;
+    font-size: 15px;
+}
+.bubble-box-self,.bubble-box-others{
+    height: max-content;
+    min-height: 50px;
+    width: 100%;
+    min-width: 400px;
+    margin-top: 10px;
+}
+.message-item-box img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.bubble-box-others>*{
+    float: right;
+}
+.bubble-box-self>*{
+    float: left;
+}
+.bubble-box-others>img{
+    position: sticky;
+    right: 0;
+}
+.bubble-box-others>.bubble{
+    position: sticky;
+    right: 70px;
+}
+
+.bubble-box-self>.bubble{
+    position: sticky;
+    left: 70px;
+}
+.bubble-box-self>.bubble::before{
+    content: "";
+    display: block;
+    position: absolute;
+    height: 0;
+    width: 0;
+    border-bottom: 15px solid transparent;
+    border-left: 0 solid blue;
+    border-top:0 solid yellow;
+    border-right: 20px solid white;
+    transform: rotate(20deg);
+    left: -14px;
+    top: 10px;
+}
+.bubble-box-others>.bubble::after{
+    content: "";
+    display: block;
+    position: absolute;
+    height: 0;
+    width: 0;
+    border-bottom: 15px solid transparent;
+    border-left: 20px solid white;
+    border-top:0 solid yellow;
+    border-right: 0 solid white;
+    transform: rotate(-20deg);
+    right:-14px;
+    top: 10px;
+}
+.bubble{
+    font-family:monospace;
+    font-size: 13px;
+    user-select: text;
+    border-radius: 10px;
+    box-sizing: border-box;
+    margin-top: 2px;
+    min-height: 50px;
+    max-width: 250px;
+    background-color: white;
+    padding:15px 10px 15px 10px;
+
+}
+
+pre::selection{
+    background-color: #f4ae21;
+    color: white;
+}
+pre{
+    user-select: text;
+    vertical-align: middle;
+    word-wrap:break-word;
+    white-space: break-spaces;
+    margin:0;
+}
