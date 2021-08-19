@@ -8,4 +8,5 @@ public interface MessageService {
     void sendMessageOneToOne(ChatEndPoint chatEndPoint, Message message);
     void sendUnreadMsgToUser(ChatEndPoint chatEndPoint);
     void acceptReadMessageConfirm(String toUserNum, String fromUserNum);
+    void sendMessageOneToGroup(ChatEndPoint chatEndPoint, Message message);
 }

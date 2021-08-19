@@ -111,6 +111,9 @@ public class ChatEndPoint {
                 case 3:{
                     messageService.acceptReadMessageConfirm((String)this.httpSession.getAttribute("userNum"),message1.getToUserNum());
                 }break;
+                case 4:{
+                    messageService.sendMessageOneToGroup(this,message1);
+                }break;
             }
 
 

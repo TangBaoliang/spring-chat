@@ -110,7 +110,7 @@ $(document).ready(function (){
         $(".message-item-box").html(localStorage.getItem(curChatUserNum));
         sendReadConfirm();
         $(this).find(".message-count").text("").hide(1000);
-        $("#chat-box-title").html(this.title);
+        $("#chat-box-title").html(this.title).css({"font-size":"25px", "width":"100%", "text-align":"center"});
     })
 
     $("#close-btn").on("click",function(){
