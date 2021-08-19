@@ -26,6 +26,12 @@
 					</div>
 					<div class="message-count"></div>
 				</div>
+				<div th:each="group:${groupAndUserList}" th:data-groupId="*{group.groupId}" class="group-items" th:title="*{group.groupName+'('+group.groupNum+')'}"><img draggable="false" src="/img/others.png">
+					<div class="link-info">
+						<p class="friend-comment-p" th:text="*{group.groupName}">这里显示群名称</p>
+						<p class="nickname-p" th:text="*{group.groupNum}">这里显示群号码</p>
+					</div>
+				</div>
 			</div>
 
 		</div>
