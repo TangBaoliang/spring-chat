@@ -10,6 +10,7 @@ window.onbeforeunload = function()
 let preBubbleBoxSelf = '<div class="bubble-box-self clearfix"><img src="img/02.jpg"> <div class="bubble"><pre>';
 let tailBubbleBox='</pre></div></div>';
 let preBubbleBoxOthers = '<div class="bubble-box-others clearfix"><img src="img/02.jpg"> <div class="bubble"><pre>';
+let chatType='';
 
 let curChatUserNum='';
 $(document).ready(function (){
@@ -43,7 +44,7 @@ $(document).ready(function (){
         if(res["msgTypeCode"]==1){
             alert("用户"+res["message"]+"于"+res["sendTime"]+"上线！"+"\n你可以和他聊天了");
         }
-        else if(res["msgTypeCode"]==2){
+        else if(res["msgTypeCode"]==2 || res["msgTypeCode"]==4){
 
             if(res["fromUserNum"]===curChatUserNum){
                 $(".message-item-box").append(preBubbleBoxOthers+res["message"]+tailBubbleBox)
@@ -51,7 +52,7 @@ $(document).ready(function (){
                 sendReadConfirm();
             }
             else{
-                let str = "[data-userNum='"+res['fromUserNum']+"']";
+                let str = "[data-Num='"+res['fromUserNum']+"']";
                 let count = Number($(str).find(".message-count").text());
                 $(str).find(".message-count").html(count+1);
                 $(str).find(".message-count").show();
@@ -80,9 +81,25 @@ $(document).ready(function (){
 
 
     //点击选择要发送信息的联系人
-    $(".friend-items,.group-items").on("click",function (){
+    $(".friend-items").on("click",function (){
         curChatUserNum = this.getAttribute("data-userNum");
+        chatType = 2;
+        //窗口的动画
+        $(".message-part *").hide();
+        $(".message-part *").show(300);
 
+        //消息先存进localStorage,通过localStorage导入聊天窗口
+        sessToLocalStorage(curChatUserNum);
+
+        $(".message-item-box").html(localStorage.getItem(curChatUserNum));
+        sendReadConfirm();
+        $(this).find(".message-count").text("").hide(1000);
+        $("#chat-box-title").html(this.title);
+    })
+
+    $(".group-items").on("click",function (){
+        curChatUserNum = this.getAttribute("data-groupNum");
+        chatType = 4;
         //窗口的动画
         $(".message-part *").hide();
         $(".message-part *").show(300);
@@ -122,7 +139,7 @@ $(document).ready(function (){
         let preMsg = $("#pre-send-txt").val();
         $("#pre-send-txt").val('');
         if (!preMsg.match(/^\s+$/) && preMsg!==''){
-            let json = {"msgTypeCode":2,"toUserNum":curChatUserNum,"message":preMsg};
+            let json = {"msgTypeCode":chatType,"toUserNum":curChatUserNum,"message":preMsg,"sendTime":new Date().getTime()};
             ws.send(JSON.stringify(json));
             $(".message-item-box").append(preBubbleBoxSelf+preMsg+tailBubbleBox);
             localStorageAppend(curChatUserNum,preBubbleBoxSelf+preMsg+tailBubbleBox)
