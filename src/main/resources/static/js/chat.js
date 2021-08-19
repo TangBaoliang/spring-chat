@@ -12,9 +12,10 @@ let tailBubbleBox='</pre></div></div>';
 let preBubbleBoxOthers = '<div class="bubble-box-others clearfix"><img src="img/02.jpg"> <div class="bubble"><pre>';
 let chatType='';
 let ifEnterKeyCanSend = true; //回车键弹起是否能够发送，主要是让Ctrl+key按下产生换行后阻止回车键弹起发送消息的事件
-
+let commentLabelSelf = '<div class="comment-label-self">'+$("#my-nickname").text()+'</div>';
 let curChatUserNum='';
 $(document).ready(function (){
+
     //隐藏聊天窗口
     $(".message-part *").hide();
 
@@ -142,8 +143,8 @@ $(document).ready(function (){
         if (!preMsg.match(/^\s+$/) && preMsg!==''){
             let json = {"msgTypeCode":chatType,"toUserNum":curChatUserNum,"message":preMsg,"sendTime":new Date().getTime()};
             ws.send(JSON.stringify(json));
-            $(".message-item-box").append(preBubbleBoxSelf+preMsg+tailBubbleBox);
-            localStorageAppend(curChatUserNum,preBubbleBoxSelf+preMsg+tailBubbleBox)
+            $(".message-item-box").append(commentLabelSelf+preBubbleBoxSelf+commentLabelSelf+preMsg+tailBubbleBox);
+            localStorageAppend(curChatUserNum,preBubbleBoxSelf+commentLabelSelf+preMsg+tailBubbleBox)
         }
     })
 

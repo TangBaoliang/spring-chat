@@ -250,11 +250,11 @@ div>button{
     font-size: 15px;
 }
 .bubble-box-self,.bubble-box-others{
+    margin-top: 24px;
     height: max-content;
     min-height: 50px;
     width: 100%;
     min-width: 400px;
-    margin-top: 10px;
 }
 .message-item-box img{
     height: 50px;
@@ -263,26 +263,26 @@ div>button{
     margin-right: 10px;
     margin-left: 10px;
 }
-.bubble-box-others>*{
+.bubble-box-self>*{
     float: right;
 }
-.bubble-box-self>*{
+.bubble-box-others>*{
     float: left;
 }
-.bubble-box-others>img{
+.bubble-box-self>img{
     position: sticky;
     right: 0;
 }
-.bubble-box-others>.bubble{
+.bubble-box-self>.bubble{
     position: sticky;
     right: 70px;
 }
 
-.bubble-box-self>.bubble{
+.bubble-box-others>.bubble{
     position: sticky;
     left: 70px;
 }
-.bubble-box-self>.bubble::before{
+.bubble-box-others>.bubble::before{
     content: "";
     display: block;
     position: absolute;
@@ -296,7 +296,7 @@ div>button{
     left: -14px;
     top: 10px;
 }
-.bubble-box-others>.bubble::after{
+.bubble-box-self>.bubble::after{
     content: "";
     display: block;
     position: absolute;
@@ -311,16 +311,16 @@ div>button{
     top: 10px;
 }
 .bubble{
-    font-family:monospace;
+    font-family: monospace;
     font-size: 13px;
     user-select: text;
     border-radius: 10px;
     box-sizing: border-box;
-    margin-top: 2px;
+    margin-top: 21px;
     min-height: 50px;
     max-width: 250px;
     background-color: white;
-    padding:15px 10px 15px 10px;
+    padding: 15px 10px 15px 10px;
 
 }
 
@@ -334,4 +334,20 @@ pre{
     word-wrap:break-word;
     white-space: break-spaces;
     margin:0;
+}
+
+.comment-label-self{
+    position: absolute;
+    right: 0;
+    top: -31px;
+    color: white;
+    background-color: #3cb371;
+    font-weight: lighter;
+    font-size: 10px;
+    margin-top: 10px;
+    width: max-content;
+    height: 16px;
+    line-height: 16px;
+    padding: 0 5px 0 5px;
+    border-radius: 2px;
 }
