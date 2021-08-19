@@ -1,7 +1,9 @@
 package com.ctgu.j604.springbootchat.controller;
 
 import com.ctgu.j604.springbootchat.model.FriendListInfo;
+import com.ctgu.j604.springbootchat.model.GroupAndUser;
 import com.ctgu.j604.springbootchat.model.TUser;
+import com.ctgu.j604.springbootchat.service.GroupService;
 import com.ctgu.j604.springbootchat.service.TUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +17,8 @@ import java.util.List;
 public class ViewController {
     @Resource
     private TUserService tUserService;
+    @Resource
+    private GroupService groupService;
 
     @RequestMapping("/main")
     public ModelAndView retMain(HttpServletRequest request){
@@ -22,9 +26,11 @@ public class ViewController {
         mv.setViewName("HeartChat");
         Integer curUserId = (Integer) request.getSession().getAttribute("curUserId");
         List<FriendListInfo> friendListInfoList = tUserService.getAllFriend(curUserId);
+        List<GroupAndUser> groupAndUserList = groupService.getAllGroup(curUserId);
         TUser tUser = (TUser)request.getSession().getAttribute("curUser");
         mv.addObject("curUser",tUser);
         mv.addObject("friendListInfoList",friendListInfoList);
+        mv.addObject("groupAndUserList", groupAndUserList);
         return mv;
     }
     @RequestMapping("/")
