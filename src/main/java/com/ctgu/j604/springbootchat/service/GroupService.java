@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface GroupService {
     List<GroupAndUser> getAllGroup(Integer userId);
+    List<String> getAllUsersByGroupNum(String groupNum);
 }
