@@ -70,14 +70,14 @@ public class TUserServiceImpl implements TUserService {
         if(tUser.getAge() != null && tUser.getSex() != null){
             tUserExample.or().andAgeBetween(ageBegin, ageEnd).andSexEqualTo(tUser.getSex()).andUserNumEqualTo(tUser.getUserNum());
         }
+        else if(tUser.getAge() == null && (tUser.getSex() == null || tUser.getSex().equals(""))){
+            tUserExample.or().andUserNumEqualTo(tUser.getUserNum());
+        }
         else if(tUser.getAge() == null){
             tUserExample.or().andUserNumEqualTo(tUser.getUserNum()).andSexEqualTo(tUser.getSex());
         }
-        else if(tUser.getSex() == null){
+        else if((tUser.getSex() == null || tUser.getSex().equals(""))){
             tUserExample.or().andUserNumEqualTo(tUser.getUserNum()).andAgeBetween(ageBegin, ageEnd);
-        }
-        else{
-            tUserExample.or().andUserNumEqualTo(tUser.getUserNum());
         }
         return tUserMapper.selectByExample(tUserExample);
     }
@@ -88,14 +88,14 @@ public class TUserServiceImpl implements TUserService {
         if(tUser.getAge() != null && tUser.getSex() != null){
             tUserExample.or().andAgeBetween(ageBegin, ageEnd).andSexEqualTo(tUser.getSex()).andNickNameEqualTo(tUser.getNickName());
         }
+        else if(tUser.getAge() == null && (tUser.getSex() == null || tUser.getSex().equals(""))){
+            tUserExample.or().andNickNameEqualTo(tUser.getNickName());
+        }
         else if(tUser.getAge() == null){
             tUserExample.or().andNickNameEqualTo(tUser.getNickName()).andSexEqualTo(tUser.getSex());
         }
-        else if(tUser.getSex() == null){
+        else if((tUser.getSex() == null || tUser.getSex().equals(""))){
             tUserExample.or().andNickNameEqualTo(tUser.getNickName()).andAgeBetween(ageBegin, ageEnd);
-        }
-        else{
-            tUserExample.or().andNickNameEqualTo(tUser.getNickName());
         }
         return tUserMapper.selectByExample(tUserExample);
     }
