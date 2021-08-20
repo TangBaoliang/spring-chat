@@ -69,7 +69,7 @@ $(document).ready(function (){
                 let count = Number($(str).find(".message-count").text());
                 $(str).find(".message-count").html(count+1);
                 $(str).find(".message-count").show();
-                sessionStorageAppend(res['fromUserNum'],preBubbleBoxOthers+bubbleContent+tailBubbleBox)
+                sessionStorageAppend(res['fromUserNum'],preBubbleBoxOthers+bubbleContent+tailBubbleBox);
             }
         }
 
