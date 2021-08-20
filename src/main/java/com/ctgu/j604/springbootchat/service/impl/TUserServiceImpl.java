@@ -73,8 +73,11 @@ public class TUserServiceImpl implements TUserService {
         else if(tUser.getAge() == null){
             tUserExample.or().andUserNumEqualTo(tUser.getUserNum()).andSexEqualTo(tUser.getSex());
         }
-        else{
+        else if(tUser.getSex() == null){
             tUserExample.or().andUserNumEqualTo(tUser.getUserNum()).andAgeBetween(ageBegin, ageEnd);
+        }
+        else{
+            tUserExample.or().andUserNumEqualTo(tUser.getUserNum());
         }
         return tUserMapper.selectByExample(tUserExample);
     }
@@ -88,8 +91,11 @@ public class TUserServiceImpl implements TUserService {
         else if(tUser.getAge() == null){
             tUserExample.or().andNickNameEqualTo(tUser.getNickName()).andSexEqualTo(tUser.getSex());
         }
-        else{
+        else if(tUser.getSex() == null){
             tUserExample.or().andNickNameEqualTo(tUser.getNickName()).andAgeBetween(ageBegin, ageEnd);
+        }
+        else{
+            tUserExample.or().andNickNameEqualTo(tUser.getNickName());
         }
         return tUserMapper.selectByExample(tUserExample);
     }
