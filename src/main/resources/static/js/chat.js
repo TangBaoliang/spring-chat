@@ -53,7 +53,7 @@ $(document).ready(function (){
 
             if (res["msgTypeCode"]==2 ){
                 let findStr = "[data-Num='"+res['fromUserNum']+"']";
-                bubbleContent += $(findStr).title + '</div>' + res["message"];
+                bubbleContent += $(findStr).find(".friend-comment-p").text() + '</div>' + res["message"];
             }
             else{
                 bubbleContent += res["message"][1] + '</div>' + res["message"][0];
@@ -69,7 +69,7 @@ $(document).ready(function (){
                 let count = Number($(str).find(".message-count").text());
                 $(str).find(".message-count").html(count+1);
                 $(str).find(".message-count").show();
-                sessionStorageAppend(res['fromUserNum'],preBubbleBoxOthers+bubbleContent+tailBubbleBox)
+                sessionStorageAppend(res['fromUserNum'],preBubbleBoxOthers+bubbleContent+tailBubbleBox);
             }
         }
 
