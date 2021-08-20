@@ -35,6 +35,8 @@ public class SearchFriendsController {
         //判断是否是号码
         if(tuser.getUserNum().matches("[0-9]+")){
             friendsList.addAll(tUserService.getTUserByUserNumAndAgeAndSex(tuser,ageBegin,ageEnd));
+            tuser.setNickName(tuser.getUserNum());
+            tuser.setUserNum(null);
             friendsList.addAll(tUserService.getTUserByNickNameAndAgeAndSex(tuser,ageBegin,ageEnd));
         }else{
             tuser.setNickName(tuser.getUserNum());
