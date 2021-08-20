@@ -4,6 +4,75 @@
     <meta charset="UTF-8">
     <title>SearchFriend</title>
     <style>
+        a{
+            text-decoration: none;
+        }
+        .title{
+            width: 100%;
+            display: block;
+            height: 60px;
+            background-color: #009BDB;
+        }
+        .title1{
+            width: 30%;
+            height: 60px;
+            float: left;
+        }
+        .headline1{
+            margin: 15px 10px 15px;
+            height: 30px;
+            font-size: 20px;
+            color: white;
+        }
+        .headline2{
+            margin: 15px 10px 15px;
+            height: 30px;
+            font-size: 20px;
+            color: white;
+            text-align: center;
+        }
+        .headline3{
+            margin: 15px 10px 15px;
+            height: 30px;
+            font-size: 20px;
+            color: white;
+            text-align: center;
+        }
+        .headline4{
+            margin: 15px 10px 15px;
+            height: 30px;
+            font-size: 20px;
+            color: white;
+            text-align: center;
+        }
+        .title2, .title3, .title4, .title5{
+            width: 17.5%;
+            height: 60px;
+            float: left;
+            position: relative;
+        }
+        .title2 div, .title3 div, .title5 div{
+            left: 0;
+            top: 0;
+            position: absolute;
+            width: 0;
+            height: 0;
+            background-color: white;
+            opacity: 0.3;
+            transition: width 1s;
+        }
+        .title2:hover div, .title3:hover div, .title5:hover div{
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .total{
+            width: 100%;
+            display: block;
+            height: 120px;
+            background-color: #EBF2F9;
+        }
         .search, .Select{
             width: 60%;
             height: 60px;
@@ -46,6 +115,16 @@
             height: 20px;
             margin: 10px;
         }
+        .table1{
+            width: 100%;
+            float: left;
+        }
+        .user{
+            margin: auto;
+        }
+        td{
+            width: 200px;
+        }
         .btnSearch:hover{
             background-color: rgb(79, 79, 224);
             cursor: pointer;
@@ -53,41 +132,62 @@
     </style>
 </head>
 <body>
-<form id="Search" method="post">
-    <div class="search">
-        <input type="text" name="userNum" placeholder="请输入QQ号码/昵称" class="searchfriends">
+<div class="title">
+    <div class="title1">
+        <h1 class="headline1">查找好友/群组</h1>
     </div>
-    <div class="btn">
-        <input id="submit" type="button" value="查找" class="btnSearch">
-        <div class="remindinfo"></div>
+    <div class="title2">
+        <a href="SearchFriend.html"><h1 class="headline2">找人</h1></a>
+        <div></div>
     </div>
-    <div class="Select">
-        <select class="select1" name="sex">
-            <option selected hidden disabled>性别</option>
-            <option value="">不限</option>
-            <option value="男">男</option>
-            <option value="女">女</option>
-        </select>
-        <select class="select2" name="age">
-            <option selected hidden disabled>年龄</option>
-            <option value="">不限</option>
-            <option value="1">16-20岁</option>
-            <option value="2">21-25岁</option>
-        </select>
+    <div class="title3">
+        <a href="SearchGroup.html"><h1 class="headline3">找群</h1></a>
+        <div></div>
     </div>
-</form>
-<div>
-    <table class="user">
-        <thead>
+    <div class="title4"></div>
+    <div class="title5">
+        <a><h1 class="headline4">返回主页</h1></a>
+        <div></div>
+    </div>
+</div>
+<div class="total">
+    <form id="Search" method="post">
+        <div class="search">
+            <input type="text" name="userNum" placeholder="请输入QQ号码/昵称" class="searchfriends">
+        </div>
+        <div class="btn">
+            <input id="submit" type="button" value="查找" class="btnSearch">
+            <div class="remindinfo"></div>
+        </div>
+        <div class="Select">
+            <select class="select1" name="sex">
+                <option selected hidden disabled>性别</option>
+                <option value="">不限</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+            <select class="select2" name="age">
+                <option selected hidden disabled>年龄</option>
+                <option value="">不限</option>
+                <option value="1">16-20岁</option>
+                <option value="2">21-25岁</option>
+            </select>
+        </div>
+    </form>
+    <div style="width: 40%;height: 60px;float: left;"></div>
+    <div class="table1">
+        <table class="user">
+            <thead>
             <tr>
-                <td>user_num</td>
-                <td>nick_name</td>
+                <td>QQ号码</td>
+                <td>昵称</td>
             </tr>
-        </thead>
-        <tbody class="user_table">
+            </thead>
+            <tbody class="user_table">
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </div>
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script>
