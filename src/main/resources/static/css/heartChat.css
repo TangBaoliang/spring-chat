@@ -238,6 +238,7 @@ body{
 .message-box-header{
     width: 100%;
     height: 8%;
+    opacity: 0.5;
     background-color: rgb(220, 236, 248);
 }
 .message-item-box{
@@ -381,6 +382,12 @@ div>button{
     background-color: white;
     padding: 15px 10px 15px 10px;
 
+}
+
+#chat-box-title{
+    font-size: 20px;
+    padding-top: 15.665px;
+    text-align: center;
 }
 
 pre::selection{
