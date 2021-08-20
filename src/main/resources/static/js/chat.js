@@ -53,7 +53,7 @@ $(document).ready(function (){
 
             if (res["msgTypeCode"]==2 ){
                 let findStr = "[data-Num='"+res['fromUserNum']+"']";
-                bubbleContent += $(findStr).title + '</div>' + res["message"];
+                bubbleContent += $(findStr).find(".friend-comment-p").text() + '</div>' + res["message"];
             }
             else{
                 bubbleContent += res["message"][1] + '</div>' + res["message"][0];

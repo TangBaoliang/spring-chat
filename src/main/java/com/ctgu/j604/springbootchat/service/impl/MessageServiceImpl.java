@@ -12,6 +12,8 @@ import com.ctgu.j604.springbootchat.utils.Message;
 import com.ctgu.j604.springbootchat.utils.MessageUtils;
 import com.ctgu.j604.springbootchat.websocket.ChatEndPoint;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,7 +77,16 @@ public class MessageServiceImpl implements MessageService {
             /***********************start将消息封装存到未读消息，给每一个成员都加一条未读消息************************/
             UnreadMessage unreadMessage = new UnreadMessage();
             unreadMessage.setSendTime(message.getSendTime());
-            unreadMessage.setContent(message.getMessage());
+
+            ObjectMapper mapper = new ObjectMapper();
+            String content = "";
+            try {
+                content = mapper.writeValueAsString(new String[] {message.getMessage(),memberComment});
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+
+            unreadMessage.setContent(content);
             unreadMessage.setFromUserId(fromUserId);
 
             //将此消息的发送号码设为发起此消息的成员账号，以便于前端
@@ -145,7 +156,22 @@ public class MessageServiceImpl implements MessageService {
         if(list!=null && list.size()>0){
             for (UnreadMessage u:
                  list) {
-                String msg = MessageUtils.getMessage(u.getMsgTypeCode(),u.getFromUserNum(),u.getContent(),u.getSendTime(),null);
+                String msg = "";
+                String[] messageBody = {};
+                if(u.getMsgTypeCode()==4){//这里的4代表消息是群消息
+                    String content = u.getContent();
+                    ObjectMapper mapper = new ObjectMapper();
+                    try {
+                        messageBody = mapper.readValue(content,String[].class);
+                        msg = MessageUtils.getMessage(u.getMsgTypeCode(),u.getFromUserNum(),messageBody,u.getSendTime(),null);
+                    } catch (JsonProcessingException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    msg = MessageUtils.getMessage(u.getMsgTypeCode(),u.getFromUserNum(),u.getContent(),u.getSendTime(),null);
+                }
+
                 try {
                     chatEndPoint.getSession().getBasicRemote().sendText(msg);
                 } catch (IOException e) {
