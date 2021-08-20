@@ -24,6 +24,7 @@ public class TUserServiceImpl implements TUserService {
     public TUser login(TUser loginUser) {
         TUserExample tUserExample = new TUserExample();
         tUserExample.createCriteria().andUserNumEqualTo(loginUser.getUserNum()).andPasswordEqualTo(loginUser.getPassword());
+
 //        TUserExample.Criteria criteriaNumLogin = tUserExample.or();
 //        criteriaNumLogin.andUserNumEqualTo(loginUser.getUserNum());
 //        criteriaNumLogin.andPasswordEqualTo(loginUser.getPassword());
@@ -63,4 +64,33 @@ public class TUserServiceImpl implements TUserService {
         return friendListInfoMapper.selectByExample(friendListInfoExample);
     }
 
+    @Override
+    public List<TUser> getTUserByUserNumAndAgeAndSex(TUser tUser, Integer ageBegin, Integer ageEnd) {
+        TUserExample tUserExample = new TUserExample();
+        if(tUser.getAge() != null && tUser.getSex() != null){
+            tUserExample.or().andAgeBetween(ageBegin, ageEnd).andSexEqualTo(tUser.getSex()).andUserNumEqualTo(tUser.getUserNum());
+        }
+        else if(tUser.getAge() == null){
+            tUserExample.or().andUserNumEqualTo(tUser.getUserNum()).andSexEqualTo(tUser.getSex());
+        }
+        else{
+            tUserExample.or().andUserNumEqualTo(tUser.getUserNum()).andAgeBetween(ageBegin, ageEnd);
+        }
+        return tUserMapper.selectByExample(tUserExample);
+    }
+
+    @Override
+    public List<TUser> getTUserByNickNameAndAgeAndSex(TUser tUser, Integer ageBegin, Integer ageEnd) {
+        TUserExample tUserExample = new TUserExample();
+        if(tUser.getAge() != null && tUser.getSex() != null){
+            tUserExample.or().andAgeBetween(ageBegin, ageEnd).andSexEqualTo(tUser.getSex()).andNickNameEqualTo(tUser.getNickName());
+        }
+        else if(tUser.getAge() == null){
+            tUserExample.or().andNickNameEqualTo(tUser.getNickName()).andSexEqualTo(tUser.getSex());
+        }
+        else{
+            tUserExample.or().andNickNameEqualTo(tUser.getNickName()).andAgeBetween(ageBegin, ageEnd);
+        }
+        return tUserMapper.selectByExample(tUserExample);
+    }
 }
