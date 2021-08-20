@@ -28,7 +28,8 @@ public class SearchFriendsController {
         //处理年龄
         Integer ageBegin = 0;
         Integer ageEnd = 0;
-        if(tuser.getAge().equals(1)){
+        if(tuser.getAge() == null){}
+        else if(tuser.getAge().equals(1)){
             ageBegin = 16;
             ageEnd = 20;
         }else if(tuser.getAge().equals(2)){

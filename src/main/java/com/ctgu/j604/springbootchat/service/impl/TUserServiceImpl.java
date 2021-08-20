@@ -67,7 +67,7 @@ public class TUserServiceImpl implements TUserService {
     @Override
     public List<TUser> getTUserByUserNumAndAgeAndSex(TUser tUser, Integer ageBegin, Integer ageEnd) {
         TUserExample tUserExample = new TUserExample();
-        if(tUser.getAge() != null && tUser.getSex() != null){
+        if(tUser.getAge() != null && (tUser.getSex() != null && !tUser.getSex().equals("")) ){
             tUserExample.or().andAgeBetween(ageBegin, ageEnd).andSexEqualTo(tUser.getSex()).andUserNumEqualTo(tUser.getUserNum());
         }
         else if(tUser.getAge() == null && (tUser.getSex() == null || tUser.getSex().equals(""))){
@@ -85,7 +85,7 @@ public class TUserServiceImpl implements TUserService {
     @Override
     public List<TUser> getTUserByNickNameAndAgeAndSex(TUser tUser, Integer ageBegin, Integer ageEnd) {
         TUserExample tUserExample = new TUserExample();
-        if(tUser.getAge() != null && tUser.getSex() != null){
+        if(tUser.getAge() != null && (tUser.getSex() != null && !tUser.getSex().equals(""))){
             tUserExample.or().andAgeBetween(ageBegin, ageEnd).andSexEqualTo(tUser.getSex()).andNickNameEqualTo(tUser.getNickName());
         }
         else if(tUser.getAge() == null && (tUser.getSex() == null || tUser.getSex().equals(""))){
