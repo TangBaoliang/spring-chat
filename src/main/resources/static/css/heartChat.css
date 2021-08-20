@@ -60,13 +60,72 @@ body{
     height: 100%;
 }
 
+
+/*huyao*/
+
+
 .home-part{
     z-index: 99;
     position: fixed;
     float: left;
     width: 55px;
-    background-color: #007b40;
+    background-color: mediumseagreen;
 }
+
+.home-part-navi{
+    font-family: 'icomoon';
+    font-size: 22px;
+    background-color: mediumseagreen;
+    width: 55px;
+    height: 50px;
+    margin: 10px 0 0 0;
+    padding: 0;
+    color: white;
+    /* border-radius: 5px; */
+}
+
+.home-part-navi:hover{
+    background-color: lightgray;
+}
+.home-part-navi:focus{
+    background-color: lightgray;
+}
+
+.home-part-moreinfo{
+    width: 55px;
+    float: left;
+    list-style: none;
+    background-color: white;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    display: none;
+
+}
+.home-part-moreinfo > li{
+    color: #494A5F ;
+    font-size: 22px;
+    font-weight: 400;
+    /* border: solid 1px; */
+}
+.home-part-moreinfo > li:hover{
+    background-color: lightgray;
+}
+#plus:focus + .home-part-moreinfo{
+    display: block;
+}
+.msgbtn{
+    border-radius: 5px;
+    background-color: mediumseagreen;
+    font-weight: 500;
+}
+
+
+
+
+
+
+
 
 
 .link-list-part{

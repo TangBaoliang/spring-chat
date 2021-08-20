@@ -5,10 +5,34 @@
 	<link rel="stylesheet" type="text/css" href="../css/heartChat.css"/>
 	<link rel="icon" href="../img/chat-icon.png" type="image/x-icon">
 	<title>知聊，畅聊心天地</title>
+	<style>
+		@font-face {
+			font-family: 'icomoon';
+			src:  url('../fonts/icomoon.eot?3mryyo');
+			src:  url('../fonts/icomoon.eot?3mryyo#iefix') format('embedded-opentype'),
+			url('/fonts/icomoon.ttf?3mryyo') format('truetype'),
+			url('/fonts/icomoon.woff?3mryyo') format('woff'),
+			url('/fonts/icomoon.svg?3mryyo#icomoon') format('svg');
+			font-weight: normal;
+			font-style: normal;
+			font-display: block;
+		}
+	</style>
 </head>
 <body>
 	<div class="window">
-		<div class="home-part"></div>
+		<div class="home-part">
+			<button type="button" class="home-part-navi"></button>
+			<button type="button" class="home-part-navi"></button>
+			<button type="button" class="home-part-navi"></button>
+			<button type="button" class="home-part-navi"></button>
+			<button type="button" class="home-part-navi" id="plus" ></button>
+			<ul class="home-part-moreinfo">
+				<li>1</li>
+				<li>3</li>
+				<li>4</li>
+			</ul>
+		</div>
 		<div class="link-list-part">
 			<div class="list-header">
 				<div id="my-head-box">
@@ -49,8 +73,8 @@
 			<div class="message-input-box">
 				<textarea title="换行请按Ctrl+Enter" autofocus id="pre-send-txt"></textarea>
 				<div id="btn-box">
-					<button id="close-btn">关闭</button>
-					<button id="send-btn" title="按下Enter键">发送</button>
+					<button id="close-btn" class="msgbtn">关闭</button>
+					<button id="send-btn" title="按下Enter键" class="msgbtn">发送</button>
 				</div>
 			</div>
 		</div>
