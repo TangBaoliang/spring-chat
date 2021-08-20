@@ -18,10 +18,10 @@ public class IconUploadController {
 //            String originName = userIcon.getOriginalFilename();
 //            int lastIndex = originName.lastIndexOf(".");
 //            String suffix = originName.substring(lastIndex);
-            File fileIfExist = new File("\\root\\user-icon\\example.jpg");
+            File fileIfExist = new File("/root/user-icon/example.jpg");
             String path;
             if(fileIfExist.exists()){
-                path="\\root\\user-icon\\";
+                path="/root/user-icon/";
             }
             else{
                 path = "C:\\user-icon\\";
