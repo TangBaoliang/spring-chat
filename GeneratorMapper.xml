@@ -54,20 +54,20 @@
 <!--               enableSelectByExample="true"-->
 <!--               selectByExampleQueryId="true"-->
 <!--        />-->
-        <table tableName="unread_message" domainObjectName="UnreadMessage"
-               enableCountByExample="true"
-               enableUpdateByExample="true"
-               enableDeleteByExample="true"
-               enableSelectByExample="true"
-               selectByExampleQueryId="true"
-        />
-        <table tableName="msg_history" domainObjectName="MessageHistory"
-               enableCountByExample="true"
-               enableUpdateByExample="true"
-               enableDeleteByExample="true"
-               enableSelectByExample="true"
-               selectByExampleQueryId="true"
-        />
+<!--        <table tableName="unread_message" domainObjectName="UnreadMessage"-->
+<!--               enableCountByExample="true"-->
+<!--               enableUpdateByExample="true"-->
+<!--               enableDeleteByExample="true"-->
+<!--               enableSelectByExample="true"-->
+<!--               selectByExampleQueryId="true"-->
+<!--        />-->
+<!--        <table tableName="msg_history" domainObjectName="MessageHistory"-->
+<!--               enableCountByExample="true"-->
+<!--               enableUpdateByExample="true"-->
+<!--               enableDeleteByExample="true"-->
+<!--               enableSelectByExample="true"-->
+<!--               selectByExampleQueryId="true"-->
+<!--        />-->
 <!--        <table tableName="msg_single" domainObjectName="MessageOneToOne"-->
 <!--               enableCountByExample="true"-->
 <!--               enableUpdateByExample="true"-->
@@ -82,5 +82,12 @@
 <!--               enableSelectByExample="true"-->
 <!--               selectByExampleQueryId="true"-->
 <!--        />-->
+        <table tableName="group_and_member_comment" domainObjectName="GroupAndMemberComment"
+               enableCountByExample="true"
+               enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableSelectByExample="true"
+               selectByExampleQueryId="true"
+        />
     </context>
 </generatorConfiguration>

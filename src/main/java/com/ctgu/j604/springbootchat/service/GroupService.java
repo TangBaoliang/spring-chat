@@ -7,4 +7,5 @@ import java.util.List;
 public interface GroupService {
     List<GroupAndUser> getAllGroup(Integer userId);
     List<String> getAllUsersByGroupNum(String groupNum);
+    String getMemberCommentByNumAndUserId(String groupNum, Integer userId);
 }

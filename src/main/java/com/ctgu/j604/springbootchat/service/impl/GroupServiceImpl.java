@@ -1,6 +1,9 @@
 package com.ctgu.j604.springbootchat.service.impl;
 
+import com.ctgu.j604.springbootchat.mapper.GroupAndMemberCommentMapper;
 import com.ctgu.j604.springbootchat.mapper.GroupAndUserMapper;
+import com.ctgu.j604.springbootchat.model.GroupAndMemberComment;
+import com.ctgu.j604.springbootchat.model.GroupAndMemberCommentExample;
 import com.ctgu.j604.springbootchat.model.GroupAndUser;
 import com.ctgu.j604.springbootchat.model.GroupAndUserExample;
 import com.ctgu.j604.springbootchat.service.GroupService;
@@ -14,6 +17,9 @@ import java.util.List;
 public class GroupServiceImpl implements GroupService {
     @Resource
     private GroupAndUserMapper groupAndUserMapper;
+    @Resource
+    private GroupAndMemberCommentMapper groupAndMemberCommentMapper;
+
 
     @Override
     public List<GroupAndUser> getAllGroup(Integer userId) {
@@ -32,5 +38,18 @@ public class GroupServiceImpl implements GroupService {
                 stringList.add(g.getUserNum());
             }
             return stringList;
+    }
+
+    @Override
+    public String getMemberCommentByNumAndUserId(String groupNum, Integer userId) {
+        GroupAndMemberCommentExample groupAndMemberCommentExample = new GroupAndMemberCommentExample();
+        groupAndMemberCommentExample.createCriteria().andGroupNumEqualTo(groupNum).andUserIdEqualTo(userId);
+        List<GroupAndMemberComment> list = groupAndMemberCommentMapper.selectByExample(groupAndMemberCommentExample);
+        if (list!=null){
+            return list.get(0).getMemberComment();
+        }
+        else{
+            return null;
+        }
     }
 }

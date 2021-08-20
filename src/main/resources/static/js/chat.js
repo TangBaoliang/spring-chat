@@ -14,6 +14,7 @@ let chatType='';
 let ifEnterKeyCanSend = true; //回车键弹起是否能够发送，主要是让Ctrl+key按下产生换行后阻止回车键弹起发送消息的事件
 let commentLabelSelf = '<div class="comment-label-self">'+$("#my-nickname").text()+'</div>';
 let curChatUserNum='';
+
 $(document).ready(function (){
 
     //隐藏聊天窗口
@@ -48,9 +49,19 @@ $(document).ready(function (){
         }
         else if(res["msgTypeCode"]==2 || res["msgTypeCode"]==4){
 
+            let  bubbleContent = '<div class="comment-label-others">';
+
+            if (res["msgTypeCode"]==2 ){
+                let findStr = "[data-Num='"+res['fromUserNum']+"']";
+                bubbleContent += $(findStr).title + '</div>' + res["message"];
+            }
+            else{
+                bubbleContent += res["message"][1] + '</div>' + res["message"][0];
+            }
+
             if(res["fromUserNum"]===curChatUserNum){
-                $(".message-item-box").append(preBubbleBoxOthers+res["message"]+tailBubbleBox)
-                localStorageAppend(curChatUserNum,preBubbleBoxOthers+res["message"]+tailBubbleBox);
+                $(".message-item-box").append(preBubbleBoxOthers+bubbleContent+tailBubbleBox);
+                localStorageAppend(curChatUserNum,preBubbleBoxOthers+bubbleContent+tailBubbleBox);
                 sendReadConfirm();
             }
             else{
@@ -58,15 +69,7 @@ $(document).ready(function (){
                 let count = Number($(str).find(".message-count").text());
                 $(str).find(".message-count").html(count+1);
                 $(str).find(".message-count").show();
-
-                let sess = sessionStorage.getItem(res['fromUserNum']);
-                if(sess!==null){
-                    sessionStorage.setItem(res['fromUserNum'],sess+preBubbleBoxOthers+res["message"]+tailBubbleBox);
-                }
-                else{
-                    sessionStorage.setItem(res['fromUserNum'],preBubbleBoxOthers+res["message"]+tailBubbleBox);
-                }
-
+                sessionStorageAppend(res['fromUserNum'],preBubbleBoxOthers+bubbleContent+tailBubbleBox)
             }
         }
 
@@ -197,6 +200,14 @@ $(document).ready(function (){
             localStorage.setItem(key,value);
         }
     }
-
+    function sessionStorageAppend(key, value){
+        let sess = sessionStorage.getItem(key);
+        if(sess!==null){
+            sessionStorage.setItem(key,sess+value);
+        }
+        else{
+            sessionStorage.setItem(key,value);
+        }
+    }
 })
 

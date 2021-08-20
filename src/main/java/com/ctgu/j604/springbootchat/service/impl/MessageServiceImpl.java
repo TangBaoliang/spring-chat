@@ -3,11 +3,8 @@ package com.ctgu.j604.springbootchat.service.impl;
 import com.ctgu.j604.springbootchat.mapper.GroupAndUserMapper;
 import com.ctgu.j604.springbootchat.mapper.UnreadMessageMapper;
 
-import com.ctgu.j604.springbootchat.model.GroupAndUser;
-import com.ctgu.j604.springbootchat.model.GroupAndUserExample;
-import com.ctgu.j604.springbootchat.model.UnreadMessage;
+import com.ctgu.j604.springbootchat.model.*;
 
-import com.ctgu.j604.springbootchat.model.UnreadMessageExample;
 import com.ctgu.j604.springbootchat.service.GroupService;
 import com.ctgu.j604.springbootchat.service.MessageService;
 import com.ctgu.j604.springbootchat.service.TUserService;
@@ -49,9 +46,21 @@ public class MessageServiceImpl implements MessageService {
         //提取发送此群消息的成员的账号和id
         String fromUserNum = (String)chatEndPoint.getHttpSession().getAttribute("userNum");
         Integer fromUserId = (Integer) chatEndPoint.getHttpSession().getAttribute("curUserId");
-
         //提取消息隶属的群的群号
         String groupNum = message.getToUserNum();
+
+        //获取发送此消息的群成员在群里的备注,用来封装到消息里面展示到前端
+        String memberComment = groupService.getMemberCommentByNumAndUserId(groupNum,fromUserId);
+
+        //获取发送此消息的成员的昵称，如果群备注为空则显示昵称
+        if(memberComment==null || "".equals(memberComment)){
+           memberComment = ((TUser)chatEndPoint.getHttpSession().getAttribute("curUser")).getNickName();
+        }
+
+        //如果用户没有昵称，就显示账号
+        if(memberComment==null || "".equals(memberComment)){
+            memberComment=fromUserNum;
+        }
 
         //获取群内的所有成员的账号
         List<String> groupAndUserList = groupService.getAllUsersByGroupNum(groupNum);
@@ -86,7 +95,7 @@ public class MessageServiceImpl implements MessageService {
 
             ChatEndPoint objectChatEndPoint = ChatEndPoint.onlineUserPoint.get(toUserNum);
             if(objectChatEndPoint != null){
-                String resultMessage = MessageUtils.getMessage(4, groupNum, message.getMessage(), message.getSendTime(), fromUserNum);
+                String resultMessage = MessageUtils.getMessage(4, groupNum, new String[] {message.getMessage(),memberComment}, message.getSendTime(), fromUserNum);
                 try{
                     objectChatEndPoint.getSession().getBasicRemote().sendText(resultMessage);
                 }catch (IOException e) {

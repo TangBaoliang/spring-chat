@@ -309,7 +309,7 @@ div>button{
     font-size: 15px;
 }
 .bubble-box-self,.bubble-box-others{
-    margin-top: 24px;
+    margin-top: 16px;
     height: max-content;
     min-height: 50px;
     width: 100%;
@@ -395,12 +395,10 @@ pre{
     margin:0;
 }
 
-.comment-label-self{
+.comment-label-self,.comment-label-others{
     position: absolute;
-    right: 0;
     top: -31px;
     color: white;
-    background-color: #3cb371;
     font-weight: lighter;
     font-size: 10px;
     margin-top: 10px;
@@ -409,4 +407,12 @@ pre{
     line-height: 16px;
     padding: 0 5px 0 5px;
     border-radius: 2px;
+}
+.comment-label-self{
+    right: 0;
+    background-color: #3cb371;
+}
+.comment-label-others{
+    left: 0;
+    background-color: #c98100;
 }
