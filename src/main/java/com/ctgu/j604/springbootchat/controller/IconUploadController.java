@@ -13,11 +13,9 @@ import java.io.IOException;
 @RestController
 public class IconUploadController {
     @RequestMapping("/icon/upload")
-    public Result acceptIcon(HttpServletRequest request, MultipartFile userIcon){
+    public void acceptIcon(HttpServletRequest request, MultipartFile userIcon){
         if(userIcon != null){
-//            String originName = userIcon.getOriginalFilename();
-//            int lastIndex = originName.lastIndexOf(".");
-//            String suffix = originName.substring(lastIndex);
+
             File fileIfExist = new File("/root/user-icon/example.jpg");
             String path;
             if(fileIfExist.exists()){
@@ -29,14 +27,17 @@ public class IconUploadController {
             String fileName = (String)request.getSession().getAttribute("userNum")+".jpg";
 
             File file = new File(path+fileName);
+            if (file.exists()){
+                file.delete();
+            }
             try {
                 userIcon.transferTo(file);
             } catch (IOException e) {
                 e.printStackTrace();
-                return new Result(false,"服务器文件存入失败");
+//                return new Result(false,"服务器文件存入失败");
             }
-            return new Result(true,"");
+//            return new Result(true,"");
         }
-        return new Result(false,"");
+//        return new Result(false,"");
     }
 }

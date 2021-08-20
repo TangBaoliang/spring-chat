@@ -6,21 +6,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.File;
 
-//@Configuration
-//public class UserIconConfigure implements WebMvcConfigurer
-//{
-//    public UserIconConfigure(){
-//        System.out.println("配置类创建成功");
-//    }
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry)
-//    {
-//        /** 上传路径 */
-//
-
-//
-//    }
-//}
 
 @Configuration
 public class UserIconConfigure implements WebMvcConfigurer {

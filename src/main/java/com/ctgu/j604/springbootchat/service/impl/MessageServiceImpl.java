@@ -163,7 +163,7 @@ public class MessageServiceImpl implements MessageService {
                     ObjectMapper mapper = new ObjectMapper();
                     try {
                         messageBody = mapper.readValue(content,String[].class);
-                        msg = MessageUtils.getMessage(u.getMsgTypeCode(),u.getFromUserNum(),messageBody,u.getSendTime(),null);
+                        msg = MessageUtils.getMessage(u.getMsgTypeCode(),u.getFromUserNum(),messageBody,u.getSendTime(),u.getFromMemberNum());
                     } catch (JsonProcessingException e) {
                         e.printStackTrace();
                     }

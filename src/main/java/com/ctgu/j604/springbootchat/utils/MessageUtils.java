@@ -11,6 +11,7 @@ public class MessageUtils {
             resultMessage.setMsgTypeCode(typeCode);
             resultMessage.setMessage(message);
             resultMessage.setSendTime(sendTime);
+            resultMessage.setFromMemberNum(fromMemberNum);
             if (fromUserNum != null){
                 resultMessage.setFromUserNum(fromUserNum);
             }

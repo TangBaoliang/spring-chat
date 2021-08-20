@@ -4,12 +4,26 @@ window.onbeforeunload = function()
     //清除sessionStorage值
     sessionStorage.clear();
 
+    refreshAllImg(null);
 }
 
+//刷新所有图片
+function refreshAllImg(ob){
+    if (ob!==null){
+        ob.src = ob.src+'?time='+new Date().getTime();
+    }
+    else {
+        let imgs = document.getElementsByTagName("img");
+        for (let img of imgs) {
+            img.src = img.src+'?time='+(new Date()).getSeconds();
+        }
+    }
+}
 
-let preBubbleBoxSelf = '<div class="bubble-box-self clearfix"><img src="img/02.jpg"> <div class="bubble"><pre>';
+let myIconSrc = document.getElementById("my-chat-head").src;
+let preBubbleBoxSelf = '<div class="bubble-box-self clearfix"><img src="'+myIconSrc+'"> <div class="bubble"><pre>';
 let tailBubbleBox='</pre></div></div>';
-let preBubbleBoxOthers = '<div class="bubble-box-others clearfix"><img src="img/02.jpg"> <div class="bubble"><pre>';
+let preBubbleBoxOthers = ['<div class="bubble-box-others clearfix"><img src="/img/user-icon/','','.jpg"/><div class="bubble"><pre>'];
 let chatType='';
 let ifEnterKeyCanSend = true; //回车键弹起是否能够发送，主要是让Ctrl+key按下产生换行后阻止回车键弹起发送消息的事件
 let commentLabelSelf = '<div class="comment-label-self">'+$("#my-nickname").text()+'</div>';
@@ -52,16 +66,20 @@ $(document).ready(function (){
             let  bubbleContent = '<div class="comment-label-others">';
 
             if (res["msgTypeCode"]==2 ){
+                preBubbleBoxOthers[1] = res['fromUserNum'];//设置头像地址
+
                 let findStr = "[data-Num='"+res['fromUserNum']+"']";
                 bubbleContent += $(findStr).find(".friend-comment-p").text() + '</div>' + res["message"];
             }
             else{
+                preBubbleBoxOthers[1] = res["fromMemberNum"];//设置头像地址
+
                 bubbleContent += res["message"][1] + '</div>' + res["message"][0];
             }
-
+            let preBleBoxForOther = preBubbleBoxOthers[0]+preBubbleBoxOthers[1]+preBubbleBoxOthers[2];
             if(res["fromUserNum"]===curChatUserNum){
-                $(".message-item-box").append(preBubbleBoxOthers+bubbleContent+tailBubbleBox);
-                localStorageAppend(curChatUserNum,preBubbleBoxOthers+bubbleContent+tailBubbleBox);
+                $(".message-item-box").append(preBleBoxForOther+bubbleContent+tailBubbleBox);
+                localStorageAppend(curChatUserNum,preBleBoxForOther+bubbleContent+tailBubbleBox);
                 sendReadConfirm();
             }
             else{
@@ -69,7 +87,7 @@ $(document).ready(function (){
                 let count = Number($(str).find(".message-count").text());
                 $(str).find(".message-count").html(count+1);
                 $(str).find(".message-count").show();
-                sessionStorageAppend(res['fromUserNum'],preBubbleBoxOthers+bubbleContent+tailBubbleBox);
+                sessionStorageAppend(res['fromUserNum'],preBleBoxForOther+bubbleContent+tailBubbleBox);
             }
         }
 
@@ -115,7 +133,7 @@ $(document).ready(function (){
         $(".message-item-box").html(localStorage.getItem(curChatUserNum));
         sendReadConfirm();
         $(this).find(".message-count").text("").hide(1000);
-        $("#chat-box-title").html(this.title).css({"font-size":"25px", "width":"100%", "text-align":"center"});
+        $("#chat-box-title").html(this.title);
     })
 
     $("#close-btn").on("click",function(){

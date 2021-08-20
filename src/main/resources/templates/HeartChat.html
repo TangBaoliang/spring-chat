@@ -3,7 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="css/heartChat.css"/>
+	<link rel="stylesheet" href="css/modifyInfoPage.css" type="text/css">
 	<link rel="icon" href="img/chat-icon.png" type="image/x-icon">
+
 	<title>知聊，畅聊心天地</title>
 	<style>
 		@font-face {
@@ -22,35 +24,52 @@
 <body>
 	<div class="window">
 		<div class="home-part">
-			<button type="button" class="home-part-navi"></button>
-			<button type="button" class="home-part-navi"></button>
-			<button type="button" class="home-part-navi"></button>
-			<button type="button" class="home-part-navi"></button>
-			<button type="button" class="home-part-navi" id="plus"></button>
-			<ul class="home-part-moreinfo">
-				<li>1</li>
-				<li>3</li>
-				<li>4</li>
-			</ul>
+			<button type="button" class="home-part-navi"></button>
+			<button type="button" class="home-part-navi"></button>
+			<button type="button" class="home-part-navi"></button>
+			<button type="button" class="home-part-navi"></button>
+			<div type="button" id="setting-icon"></div>
+
+			<div id="modify-part">
+				<div><img id="my-chat-head-big" th:src="@{'/img/user-icon/'+*{curUser.getUserNum()}+'.jpg'}"></div>
+				<div id="modify-icon-btn">上传头像 <span></span></div>
+				<form action="icon/upload" enctype="multipart/form-data" method="post">
+					<input id="file-input" type="file" name="userIcon">
+
+					<div><input id="icon-submit-btn" type="submit" value="提交"></div>
+					<div class="info-item">昵称：<span th:text="*{curUser.nickName}"></span></div>
+					<div class="info-item">账号：<span th:text="*{curUser.userNum}"></span></div>
+					<div class="info-item">电话号码：<span th:text="*{curUser.phoneNum}"></span></div>
+					<div class="info-item">邮箱：<span th:text="*{curUser.email}"></span></div>
+					<div class="info-item">性别：<span th:text="*{curUser.sex}"></span></div>
+					<div class="info-item">年龄：<span th:text="*{curUser.age}"></span></div>
+					<div class="info-item">创建时间：<span th:text="*{curUser.createdTime}"></span></div>
+
+				</form>
+			</div>
 		</div>
+
+
 		<div class="link-list-part">
 			<div class="list-header">
 				<div id="my-head-box">
-					<img id="my-chat-head" src="/img/self.png">
+					<img id="my-chat-head" th:src="@{'/img/user-icon/'+*{curUser.getUserNum()}+'.jpg'}">
 					<p id="my-nickname" th:text="*{curUser.nickName}">这里显示昵称</p>
 					<p id="my-userNum" th:text="*{curUser.userNum}">这里显示账号</p>
 				</div>
 				<input id="link-search" type="text" placeholder="输入好友或群聊名称">
 			</div>
 			<div class="links-box beautiful-scrollbar">
-				<div th:each="firend:${friendListInfoList}" th:data-Num="*{firend.userNum}" th:data-userNum="*{firend.userNum}" class="friend-items" th:title="*{firend.commentForFriend+'('+firend.nickName+')'}"><img draggable="false" src="/img/others.png">
+				<div th:each="firend:${friendListInfoList}" th:data-Num="*{firend.userNum}" th:data-userNum="*{firend.userNum}" class="friend-items" th:title="*{firend.commentForFriend+'('+firend.nickName+')'}">
+					<img draggable="false" th:src="@{'/img/user-icon/'+*{firend.userNum}+'.jpg'}">
 					<div class="link-info">
 						<p class="friend-comment-p" th:text="*{firend.commentForFriend}">这里显示好友备注</p>
 						<p class="nickname-p" th:text="*{firend.nickName}">这里显示好友昵称</p>
 					</div>
 					<div class="message-count"></div>
 				</div>
-				<div th:each="group:${groupAndUserList}" th:data-Num="*{group.groupNum}" th:data-groupNum="*{group.groupNum}" class="group-items" th:title="*{group.groupName+'('+group.groupNum+')'}"><img draggable="false" src="/img/others.png">
+				<div th:each="group:${groupAndUserList}" th:data-Num="*{group.groupNum}" th:data-groupNum="*{group.groupNum}" class="group-items" th:title="*{group.groupName+'('+group.groupNum+')'}">
+					<img draggable="false" th:src="@{'/img/user-icon/'+*{group.groupNum}+'.jpg'}">
 					<div class="link-info">
 						<p class="friend-comment-p" th:text="*{group.groupName}">这里显示群名称</p>
 						<p class="nickname-p" th:text="*{group.groupNum}">这里显示群号码</p>
@@ -81,5 +100,6 @@
 	</div>
 	<script src="/js/jquery-3.6.0.js"></script>
 	<script src="/js/chat.js"></script>
+	<script src="/js/modifyPage.js"></script>
 </body>
 </html>

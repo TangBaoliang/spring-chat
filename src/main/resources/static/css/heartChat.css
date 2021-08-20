@@ -77,50 +77,35 @@ body{
     font-size: 22px;
     background-color: mediumseagreen;
     width: 55px;
-    height: 50px;
-    margin: 10px 0 0 0;
+    height: 55px;
+    margin: 0;
     padding: 0;
     color: white;
+    transition: ease 0.5s;
     /* border-radius: 5px; */
 }
-
 .home-part-navi:hover{
-    background-color: lightgray;
+    background-color:#5ac68a;
 }
-.home-part-navi:focus{
-    background-color: lightgray;
-}
-
-.home-part-moreinfo{
-    width: 55px;
-    float: left;
-    list-style: none;
-    background-color: white;
-    text-align: center;
-    padding: 0;
-    margin: 0;
-    display: none;
-
-}
-.home-part-moreinfo > li{
-    color: #494A5F ;
+#setting-icon{
+    font-family: 'icomoon';
     font-size: 22px;
-    font-weight: 400;
-    /* border: solid 1px; */
-}
-.home-part-moreinfo > li:hover{
-    background-color: lightgray;
-}
-#plus:focus + .home-part-moreinfo{
-    display: block;
-}
-.msgbtn{
-    border-radius: 5px;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    margin: 0 5px 10px 5px;
+    line-height: 45px;
+    text-align: center;
+    width: 45px;
+    height: 45px;
     background-color: mediumseagreen;
-    font-weight: 500;
+    border-radius: 50%;
+    transition: ease 0.5s;
 }
-
-
+#setting-icon:hover{
+    background-color: #5ac68a;
+    transform: rotate(360deg);
+}
 
 
 
