@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SearchFriend</title>
+    <style>
+        .search, .Select{
+            width: 60%;
+            height: 60px;
+            float: left;
+            text-align: right;
+        }
+        .btn{
+            width: 40%;
+            height: 60px;
+            float: left;
+        }
+        .searchfriends{
+            border: solid 0.5px rgb(100, 100, 204);
+            width: 50%;
+            height: 34px;
+            font-size: 17px;
+            margin-top: 11px;
+        }
+        .remindinfo{
+            width: 200px;
+            height: 30px;
+            float: right;
+            margin-top: 15px;
+            margin-right: 200px;
+        }
+        .btnSearch{
+            border: 0;
+            border-radius: 3px;
+            width: 100px;
+            height: 40px;
+            margin-top: 11px;
+            margin-left: 30px;
+            font-size: 18px;
+            font-family: sans-serif;
+            background-color: rgb(79, 121, 238);
+            color: white;
+        }
+        .select1, .select2{
+            width: 72px;
+            height: 20px;
+            margin: 10px;
+        }
+        .btnSearch:hover{
+            background-color: rgb(79, 79, 224);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<form id="Search" method="post">
+    <div class="search">
+        <input type="text" name="userNum" placeholder="请输入QQ号码/昵称" class="searchfriends">
+    </div>
+    <div class="btn">
+        <input id="submit" type="button" value="查找" class="btnSearch">
+        <div class="remindinfo"></div>
+    </div>
+    <div class="Select">
+        <select class="select1" name="sex">
+            <option selected hidden disabled>性别</option>
+            <option value="">不限</option>
+            <option value="男">男</option>
+            <option value="女">女</option>
+        </select>
+        <select class="select2" name="age">
+            <option selected hidden disabled>年龄</option>
+            <option value="">不限</option>
+            <option value="1">16-20岁</option>
+            <option value="2">21-25岁</option>
+        </select>
+    </div>
+</form>
+<div>
+    <table class="user">
+        <thead>
+            <tr>
+                <td>user_num</td>
+                <td>nick_name</td>
+            </tr>
+        </thead>
+        <tbody class="user_table">
+
+        </tbody>
+    </table>
+</div>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+    $(function(){
+        let validateUrl = "http://" + window.location.host.toString() + "/search";
+        $("#submit").click(function(){
+            $.ajax({
+                type: "POST",
+                url: validateUrl,
+                data: $("#Search").serialize(),
+                dataType: "json",
+                success: function(data){
+                    if(data.length === 0){
+                        $(".remindinfo").html("不存在此用户");
+                    }
+                    else{
+                        for (let i=0; i<data.length; i++) {
+                            $(".user_table").append("<tr>" + "<td>"+data[i].userNum +"</td>"+"<td>"+data[i].nickName+"</td>"+"</tr>");
+                        }
+                    }
+                }
+            })
+        })
+    })
+</script>
+</body>
+</html>
