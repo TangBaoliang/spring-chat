@@ -1,0 +1,147 @@
+a{
+    text-decoration: none;
+}
+.title{
+    width: 100%;
+    display: block;
+    height: 60px;
+    background-color: #009BDB;
+}
+.title1{
+    width: 30%;
+    height: 60px;
+    float: left;
+}
+.headline1{
+    margin: 15px 10px 15px;
+    height: 30px;
+    font-size: 20px;
+    color: white;
+}
+.headline2{
+    margin: 15px 10px 15px;
+    height: 30px;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+.headline3{
+    margin: 15px 10px 15px;
+    height: 30px;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+.headline4{
+    margin: 15px 10px 15px;
+    height: 30px;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+}
+.title2, .title3, .title4, .title5{
+    width: 17.5%;
+    height: 60px;
+    float: left;
+    position: relative;
+}
+.title2 div, .title3 div, .title5 div{
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 0;
+    height: 0;
+    background-color: white;
+    opacity: 0.3;
+    transition: width 1s;
+}
+.title2:hover div, .title3:hover div, .title5:hover div{
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.total{
+    width: 100%;
+    display: block;
+    height: 120px;
+    background-color: #EBF2F9;
+}
+.search, .Select{
+    width: 60%;
+    height: 60px;
+    float: left;
+    text-align: right;
+}
+.btn{
+    width: 40%;
+    height: 60px;
+    float: left;
+}
+.searchfriends{
+    border: solid 0.5px rgb(100, 100, 204);
+    width: 50%;
+    height: 34px;
+    font-size: 17px;
+    margin-top: 11px;
+}
+.remindinfo{
+    width: 200px;
+    height: 30px;
+    float: right;
+    margin-top: 15px;
+    margin-right: 200px;
+}
+.btnSearch{
+    border: 0;
+    border-radius: 3px;
+    width: 100px;
+    height: 40px;
+    margin-top: 11px;
+    margin-left: 30px;
+    font-size: 18px;
+    font-family: sans-serif;
+    background-color: rgb(79, 121, 238);
+    color: white;
+}
+.select1, .select2{
+    width: 72px;
+    height: 20px;
+    margin: 10px 40px;
+}
+.table1{
+    width: 100%;
+    float: left;
+}
+.user{
+    margin: auto;
+}
+td{
+    width: 200px;
+}
+.btnSearch:hover{
+    background-color: rgb(79, 79, 224);
+    cursor: pointer;
+}
+#addfriend{
+    width: 60px;
+    height: 25px;
+    margin-left: 2px;
+    margin-top: 2px;
+    border-radius: 3px;
+    border: 0;
+    color: white;
+    background-color: #8FC0E7;
+}
+#addfriend:hover{
+    cursor: pointer;
+    background-color: #009BDB;
+    transition: ease 0.3s;
+}
+#checkmsg{
+    margin: 9px;
+}
+#label{
+    display: block;
+    margin: 5px;
+}

@@ -218,7 +218,7 @@ body{
 
 
 
-.friend-items,.group-items{
+.friend-items,.group-items,.system-items{
     width: 100%;
     height: 70px;
     box-sizing: border-box;
@@ -247,7 +247,7 @@ body{
 }
 
 
-.friend-items:hover,.group-items:hover{
+.friend-items:hover,.group-items:hover, .system-items:hover{
     background-color: #eeecec;
 }
 
