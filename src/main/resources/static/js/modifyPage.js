@@ -17,4 +17,14 @@ $(document).ready(function (){
     $("#add-btn").on("click",function(){
         $("#add-list").toggle(300);
     })
+
+    $("#window-close-btn").on("click",function(){
+        $("#friend-add-window").slideUp(400);
+    })
+
+    $("#add-friend-btn").on("click",function(){
+        $("#friend-add-window").slideDown(200);
+    })
+
+
 })
