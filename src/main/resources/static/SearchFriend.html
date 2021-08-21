@@ -129,6 +129,17 @@
             background-color: rgb(79, 79, 224);
             cursor: pointer;
         }
+        #addfriend{
+            width: 60px;
+            height: 25px;
+            padding-left: 5px;
+            padding-top: 5px;
+            border-radius: 3px;
+            background-color: #8FC0E7;
+        }
+        #addfriend:hover{
+
+        }
     </style>
 </head>
 <body>
@@ -181,6 +192,7 @@
             <tr>
                 <td>QQ号码</td>
                 <td>昵称</td>
+                <td>添加好友</td>
             </tr>
             </thead>
             <tbody class="user_table">
@@ -200,12 +212,14 @@
                 data: $("#Search").serialize(),
                 dataType: "json",
                 success: function(data){
+                    $(".user_table").html("");
+                    $(".remindinfo").html("");
                     if(data.length === 0){
                         $(".remindinfo").html("不存在此用户");
                     }
                     else{
                         for (let i=0; i<data.length; i++) {
-                            $(".user_table").append("<tr>" + "<td>"+data[i].userNum +"</td>"+"<td>"+data[i].nickName+"</td>"+"</tr>");
+                            $(".user_table").append("<tr>" + "<td>"+data[i].userNum +"</td>"+"<td>"+data[i].nickName+"</td>"+ "<td>"+"<input id='addfriend' value='好友' type='button'>"+"</td>"+"</tr>");
                         }
                     }
                 }
