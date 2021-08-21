@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="icon" href="img/chat-icon.png" type="image/x-icon">
+    <link rel="icon" href="../static/img/chat-icon.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css"/>
     <!--CSS RESET-->
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -29,9 +29,9 @@
 
             <div class="row">
                 <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
-                    <form id="login-form" method="post" action="/login" th:action="@{/login}" class="form-horizontal"
+                    <form id="login-form" method="post" action="/register" th:action="@{/register}" class="form-horizontal"
                           onkeydown="if(event.keyCode===13){return false;}">
-                        <div class="heading">Login here</div>
+                        <div class="heading">Register here</div>
                         <div class="form-group">
                             <i class="fa fa-user"></i><input id="userNum" required name="userNum" type="text"
                                                              class="form-control"
@@ -41,15 +41,13 @@
                             <i class="fa fa-lock"></i><input id="password" required name="password" type="password"
                                                              class="form-control" placeholder="Password"/>
                         </div>
+                        <div class="form-group">
+                            <i class="fa fa-lock"></i><input id="confirmPassword" required name="Confirmpassword" type="password"
+                                                             class="form-control" placeholder="ConfirmPassword"/>
+                        </div>
                         <div id="remind-info"></div>
                         <div class="form-group">
-                            <button id="submit" type="button" class="btn btn-default"><i
-                                    class="fa fa-arrow-right">Login</i></button>
-                            <span>No account yet? <br><a th:href="@{/templates/register.html}" class="create_account">Register for one now !!!!</a></span>
-                        </div>
-                        <div class="htmleaf-links register">
-                            <a th:href="@{/templates/register.html}" target="_blank">点击注册</a>
-                            <a href="https://www.cygao.top/" target="_blank"><span>关于作者</span></a>
+                            <button id="submit" type="button" class="btn btn-default"><i class="fa fa-arrow-right">Register</i></button>
                         </div>
                     </form>
                 </div>
@@ -62,9 +60,8 @@
 <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 <script>
     $(function () {
-        let validateUrl = "http://" + window.location.host.toString() + "/login";
+        let validateUrl = "http://" + window.location.host.toString() + "/register";
         let mainUrl = "http://" + window.location.host.toString() + "/main";
-        let registerUrl = "http://" + window.location.host.toString() + "/register";
         $("#submit").click(function () {
             $.ajax({
                 type: "POST",

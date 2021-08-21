@@ -39,4 +39,11 @@ public class ViewController {
         modelAndView.setViewName("login");
         return modelAndView;
     }
+
+//    @RequestMapping("/register")
+//    public ModelAndView registerHtml(){
+//        ModelAndView modelAndView = new ModelAndView();
+//        modelAndView.setViewName("register");
+//        return  modelAndView;
+//    }
 }
