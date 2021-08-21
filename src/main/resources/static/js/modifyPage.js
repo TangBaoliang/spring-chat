@@ -32,6 +32,9 @@ $(document).ready(function (){
 
     $("#group-add-confirm").on("click",function(){
 
+        $(".checkbox-for-friend").hide(400);
+        $("#group-create-box").hide(400);
+
         let toInviteUserNums = [];
         let i = 0;
         $("input[name='toInviteFriends']:checked").each(function(){
@@ -56,6 +59,16 @@ $(document).ready(function (){
 
             }
         });
+    })
+
+    $("#group-create-btn").on("click",function (){
+        $(".checkbox-for-friend").show(400);
+        $("#group-create-box").show(400);
+    })
+
+    $("#group-add-cancel").on("click",function(){
+        $(".checkbox-for-friend").hide(400);
+        $("#group-create-box").hide(400);
     })
 
 })
