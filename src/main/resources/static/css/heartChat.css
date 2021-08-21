@@ -155,7 +155,6 @@ body{
     background-color: white;
     box-sizing: border-box;
     position: relative;
-    border-right: #106EBD 1px solid;
 }
 .message-part{
     position: relative;
@@ -222,7 +221,6 @@ body{
 .friend-items,.group-items{
     width: 100%;
     height: 70px;
-    border-bottom: 1px solid #cbcbcb;
     box-sizing: border-box;
     margin-left: 3px;
     margin-bottom: 1px;
@@ -251,7 +249,6 @@ body{
 
 .friend-items:hover,.group-items:hover{
     background-color: #eeecec;
-    border-left: 5px solid blue;
 }
 
 .message-box-header{
