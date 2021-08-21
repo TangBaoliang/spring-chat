@@ -209,6 +209,7 @@
 <script>
     $(function(){
         let validateUrl = "http://" + window.location.host.toString() + "/search";
+        let AddUrl = "http://" + window.location.host.toString() + "/add";
         $("#submit").click(function(){
             $.ajax({
                 type: "POST",
@@ -231,7 +232,7 @@
                                 $.ajax({
                                     type: "POST",
                                     url: AddUrl,
-                                    data: userNum.serialize(),
+                                    data: data[i].userNum.serialize(),
                                     dataType: "json",
                                     success: function(res){
                                         alert();
