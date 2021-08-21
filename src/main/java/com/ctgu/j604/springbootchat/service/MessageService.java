@@ -1,5 +1,6 @@
 package com.ctgu.j604.springbootchat.service;
 
+import com.ctgu.j604.springbootchat.model.TUser;
 import com.ctgu.j604.springbootchat.utils.Message;
 import com.ctgu.j604.springbootchat.websocket.ChatEndPoint;
 
@@ -10,4 +11,5 @@ public interface MessageService {
     void acceptReadMessageConfirm(String toUserNum, String fromUserNum);
     void sendMessageOneToGroup(ChatEndPoint chatEndPoint, Message message);
     void sendAddFriendMessageOneToOne(ChatEndPoint chatEndPoint, Message message);
+    void sendInviteMessage(TUser tUser, String[] toInviteNums,String groupNum,String groupName);
 }
