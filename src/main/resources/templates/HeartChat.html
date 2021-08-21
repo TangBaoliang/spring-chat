@@ -24,11 +24,17 @@
 <body>
 	<div class="window">
 		<div class="home-part">
-			<button type="button" class="home-part-navi"></button>
-			<button type="button" class="home-part-navi"></button>
-			<button type="button" class="home-part-navi"></button>
-			<button type="button" class="home-part-navi"></button>
-			<div type="button" id="setting-icon"></div>
+			<div class="home-part-navi"></div>
+			<div class="home-part-navi"></div>
+			<div class="home-part-navi"></div>
+			<div class="home-part-navi" id="add-btn" tabindex="10">
+				<div id="add-list">
+					<a href="/SearchFriend.html" target="_blank"><div class="add-list-item">+添加好友</div></a>
+					<a href="#"><div class="add-list-item">+发起群聊</div></a>
+					<a href="#"><div class="add-list-item">+加入群聊</div></a>
+				</div>
+			</div>
+			<div id="setting-icon"></div>
 
 			<div id="modify-part">
 				<div><img id="my-chat-head-big" th:src="@{'/img/user-icon/'+*{curUser.getUserNum()}+'.jpg'}"></div>

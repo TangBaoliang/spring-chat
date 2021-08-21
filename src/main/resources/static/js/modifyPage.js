@@ -13,4 +13,8 @@ $(document).ready(function (){
         $("#modify-icon-btn").show();
         refreshAllImg(document.getElementById("my-chat-head"));
     })
+
+    $("#add-btn").on("click",function(){
+        $("#add-list").toggle(300);
+    })
 })

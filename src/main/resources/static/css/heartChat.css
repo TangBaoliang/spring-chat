@@ -3,8 +3,12 @@
     display: block;
     clear: both;
 }
+a{
+    text-decoration: none;
+}
 *{
     user-select: none;
+    list-style: none;
 }
 .beautiful-scrollbar{
     scrollbar-arrow-color: #f4ae21; /**//*三角箭头的颜色*/
@@ -76,12 +80,15 @@ body{
     font-family: 'icomoon';
     font-size: 22px;
     background-color: mediumseagreen;
+    text-align: center;
+    line-height: 55px;
     width: 55px;
     height: 55px;
-    margin: 0;
+    margin:20px 0 0 0;
     padding: 0;
     color: white;
     transition: ease 0.5s;
+    position: relative;
     /* border-radius: 5px; */
 }
 .home-part-navi:hover{
@@ -106,6 +113,33 @@ body{
     background-color: #5ac68a;
     transform: rotate(360deg);
 }
+#add-list{
+    display:none;
+    position: absolute;
+    top: 55px;
+    left: 55px;
+    background-color: #86dcac;
+    padding: 0;
+    margin: 0;
+    border-top-right-radius:10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.add-list-item{
+    font-family: "Microsoft YaHei", "Segoe UI", "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    text-align: center;
+    height: 40px;
+    width: 100px;
+    color: white;
+    line-height: 40px;
+    list-style: none;
+    transition: ease 0.5s;
+}
+.add-list-item:hover{
+    background-color: #6dd299;
+}
+
 
 
 
