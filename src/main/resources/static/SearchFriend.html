@@ -224,6 +224,20 @@
                     else{
                         for (let i=0; i<data.length; i++) {
                             $(".user_table").append("<tr>" + "<td>"+data[i].userNum +"</td>"+"<td>"+data[i].nickName+"</td>"+ "<td>"+"<input id='addfriend' value='+ 好友' type='button'>"+"</td>"+"</tr>");
+                            var id = "addfriend";
+                            var button = document.getElementById(id);
+                            button.id = id + i;
+                            button.onclick=function (){
+                                $.ajax({
+                                    type: "POST",
+                                    url: AddUrl,
+                                    data: userNum.serialize(),
+                                    dataType: "json",
+                                    success: function(res){
+                                        alert();
+                                    }
+                                })
+                            }
                         }
                     }
                 }
