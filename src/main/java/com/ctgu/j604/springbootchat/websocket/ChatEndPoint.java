@@ -114,6 +114,9 @@ public class ChatEndPoint {
                 case 4:{
                     messageService.sendMessageOneToGroup(this,message1);
                 }break;
+                case 5:{
+                    messageService.sendAddFriendMessageOneToOne(this, message1);
+                }
             }
 
 

@@ -35,7 +35,32 @@ public class MessageServiceImpl implements MessageService {
     @Resource
     public GroupService groupService;
 
+    @Override
+    public void sendAddFriendMessageOneToOne(ChatEndPoint chatEndPoint, Message message) {
+        String fromUserNum = (String)chatEndPoint.getHttpSession().getAttribute("userNum");
+        Integer fromUserId = (Integer) chatEndPoint.getHttpSession().getAttribute("curUserId");
+        String toUserNum = message.getToUserNum();
 
+        UnreadMessage unreadMessage = new UnreadMessage();
+        unreadMessage.setSendTime(message.getSendTime());
+        unreadMessage.setContent(message.getMessage());
+        unreadMessage.setFromUserId(fromUserId);
+        unreadMessage.setFromUserNum(fromUserNum);
+        unreadMessage.setToUserNum(toUserNum);
+        unreadMessage.setMsgTypeCode(5);
+        unreadMessageMapper.insert(unreadMessage);
+
+        ChatEndPoint objectChatEndPoint = ChatEndPoint.onlineUserPoint.get(toUserNum);
+        if(objectChatEndPoint!=null){
+            String resultMessage = MessageUtils.getMessage(5,fromUserNum,message.getMessage(),message.getSendTime(),null);
+            try {
+                objectChatEndPoint.getSession().getBasicRemote().sendText(resultMessage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
 
     @Override
     public void onlineBroadcastToFriends(ChatEndPoint chatEndPoint, Message message) {
@@ -44,7 +69,6 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public void sendMessageOneToGroup(ChatEndPoint chatEndPoint, Message message) {
-
         //提取发送此群消息的成员的账号和id
         String fromUserNum = (String)chatEndPoint.getHttpSession().getAttribute("userNum");
         Integer fromUserId = (Integer) chatEndPoint.getHttpSession().getAttribute("curUserId");
