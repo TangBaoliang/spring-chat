@@ -101,13 +101,10 @@ $(document).ready(function (){
             addSystemItems(comment,groupString,res['fromUserNum'],8,res["sendTime"]);
         }
     }
-
     //3.连接断开时出发的事件
     ws.onclose = function(){
-
+        $("#cover-offline").show();
     }
-
-
     /**********************绑定webSocket事件***********************end*/
 
 

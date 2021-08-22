@@ -565,3 +565,25 @@ pre{
     border-radius: 8px;
     bottom:7px;
 }
+
+#cover-offline{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(188, 188, 188, 0.75);
+
+    z-index: 10000;
+    position: absolute;
+    display: none;
+}
+#cover-offline>div{
+    width: 65%;
+    height: 400px;
+    margin:200px auto 0 auto;
+    border-top: 50px solid #3cb371;
+    color: #3cb371;
+    font-size: 30px;
+    text-align: center;
+    line-height: 400px;
+    background-color: white;
+    opacity: 1.0;
+}
