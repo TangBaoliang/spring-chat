@@ -486,18 +486,21 @@ pre{
 }
 .system-items{
     width: 100%;
-    height: 80px;
-    padding-top: 10px;
+    height: 85px;
+    padding-top: 15px;
     padding-left: 10px;
     box-sizing: border-box;
+    position: relative;
 }
 
 .system-items-p1{
     min-width: 300px;
+    height: 21px;
 }
 
 .system-items-p2{
     min-width: 300px;
+    height: 21px;
 }
 
 .system-items-p3{
@@ -546,4 +549,19 @@ pre{
     border-top-right-radius: 4px;
     transform: rotate(30deg);
     border-bottom-left-radius: 4px;
+}
+
+.time-label{
+    background-color: #bcbcbc;
+    color: white;
+    height: 15px;
+    line-height: 12px;
+    font-family: "Microsoft YaHei", "Segoe UI", "Lucida Grande", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    text-align: center;
+    width: 80px;
+    position: absolute;
+    left: 5px;
+    border-radius: 8px;
+    bottom:7px;
 }

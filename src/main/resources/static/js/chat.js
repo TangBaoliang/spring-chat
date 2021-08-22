@@ -91,14 +91,14 @@ $(document).ready(function (){
             }
         }
         else if(res["msgTypeCode"]==5){
-            addSystemItems(res['fromUserNum']+"请求添加你为好友", res["message"], res['fromUserNum'], res["msgTypeCode"]);
+            addSystemItems(res['fromUserNum']+"请求添加你为好友", res["message"], res['fromUserNum'], res["msgTypeCode"],res["sendTime"]);
         }
         else if(res["msgTypeCode"]==8){
             let str = "[data-Num='"+res['fromMemberNum']+"']";
             let comment = $(str).find(".friend-comment-p").text()+" 邀你加入群聊";
             let groupString = res["message"]+"("+res["fromUserNum"]+")";
             // $("#systeminfo").append("<div class='system-items'>"+"<p class='friend-comment-p'>"+ comment +"</p>"+"<p>"+ groupString +"</p>"+"</div>");
-            addSystemItems(comment,groupString,res['fromMemberNum'],8);
+            addSystemItems(comment,groupString,res['fromMemberNum'],8,res["sendTime"]);
         }
     }
 
@@ -235,9 +235,7 @@ $(document).ready(function (){
         $(".message-part *").hide(300);
     })
 
-    // $(".refuse-btn"),on("click",function (){
-    //     let fromNum = $(this).parent().parent().attr("data-")
-    // })
+
 
     function sendReadConfirm(){
 
@@ -281,15 +279,51 @@ $(document).ready(function (){
         }
     }
 
-    function addSystemItems(p1Txt,p2Txt,dataFromNum,msgTypeCode){
+    function addSystemItems(p1Txt,p2Txt,dataFromNum,msgTypeCode,time){
         let newSystemItem = $(".system-items:nth-of-type(1)").clone(true);
         newSystemItem.find(".system-items-p1").text(p1Txt);
         newSystemItem.find(".system-items-p2").text(p2Txt);
         newSystemItem.attr("data-num",dataFromNum);
         newSystemItem.attr("data-type-code",msgTypeCode);
+        newSystemItem.find(".time-label").html(stampToStr(time))
         newSystemItem.appendTo("#systeminfo");
+
         newSystemItem.show();
         $("#applymsg").find(".navi-count").show(200);
+
+        $(".refuse-btn").on("click",function (){
+            let fromNum = $(this).parent().parent().attr("data-num");
+            let typeCode = Number($(this).parent().parent().attr("data-type-code"));
+            if(typeCode==5){
+                typeCode=7;
+            }
+            else if(typeCode==8){
+                typeCode=10;
+            }
+            let json = {"msgTypeCode":typeCode,"toUserNum":fromNum,"message":"","sendTime":new Date().getTime()};
+            ws.send(JSON.stringify(json));
+        })
+
+        $(".agree-btn").on("click",function(){
+            let fromNum = $(this).parent().parent().attr("data-num");
+            let typeCode = Number($(this).parent().parent().attr("data-type-code"));
+            if(typeCode==5){
+                typeCode=6;
+            }
+            else if(typeCode==8){
+                typeCode=9;
+            }
+            let json = {"msgTypeCode":typeCode,"toUserNum":fromNum,"message":"","sendTime":new Date().getTime()};
+            ws.send(JSON.stringify(json));
+        })
+    }
+
+    function stampToStr(stamp){
+        let time = new Date(stamp);
+        let str = '';
+        let day = time.getDay();
+        str+=time.getFullYear()+'-'+(time.getMonth()+1)+'-'+time.getDay();
+        return str;
     }
 })
 
