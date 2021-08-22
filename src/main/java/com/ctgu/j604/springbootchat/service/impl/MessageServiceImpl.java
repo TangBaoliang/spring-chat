@@ -1,6 +1,8 @@
 package com.ctgu.j604.springbootchat.service.impl;
 
+import com.ctgu.j604.springbootchat.mapper.FriendListInfoMapper;
 import com.ctgu.j604.springbootchat.mapper.GroupAndUserMapper;
+import com.ctgu.j604.springbootchat.mapper.LinkmanListMapper;
 import com.ctgu.j604.springbootchat.mapper.UnreadMessageMapper;
 
 import com.ctgu.j604.springbootchat.model.*;
@@ -20,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +35,9 @@ public class MessageServiceImpl implements MessageService {
 
     @Resource
     public UnreadMessageMapper unreadMessageMapper;
+
+    @Resource
+    public LinkmanListMapper linkmanListMapper;
 
     @Resource
     public GroupService groupService;
@@ -60,7 +66,51 @@ public class MessageServiceImpl implements MessageService {
                 e.printStackTrace();
             }
         }
+    }
 
+    @Override
+    public void sendAgreeAddFriendMessageOneToOne(ChatEndPoint chatEndPoint, Message message) {
+        LinkmanList linkmanList1 = new LinkmanList();
+        LinkmanList linkmanList2 = new LinkmanList();
+        String fromUserNum = (String)chatEndPoint.getHttpSession().getAttribute("userNum");
+        Integer fromUserId = (Integer) chatEndPoint.getHttpSession().getAttribute("curUserId");
+        String toUserNum = message.getToUserNum();
+        UnreadMessageExample unreadMessageExample = new UnreadMessageExample();
+        UnreadMessageExample.Criteria criteria = unreadMessageExample.createCriteria();
+        criteria.andToUserNumEqualTo(fromUserNum);
+        criteria.andFromUserNumEqualTo(toUserNum);
+        criteria.andMsgTypeCodeEqualTo(5);
+        List<UnreadMessage> unreadMessageList = unreadMessageMapper.selectByExample(unreadMessageExample);
+        Integer toUserId=null;
+        if(unreadMessageList!=null && unreadMessageList.size()>0){
+            toUserId = unreadMessageList.get(0).getFromUserId();
+        }
+        if(toUserId != null){
+            unreadMessageMapper.deleteByExample(unreadMessageExample);
+
+            linkmanList1.setUserId(fromUserId);
+            linkmanList1.setFriendId(toUserId);
+            linkmanList1.setAddTime(new Date());
+            linkmanListMapper.insertSelective(linkmanList1);
+
+            linkmanList2.setUserId(toUserId);
+            linkmanList2.setFriendId(fromUserId);
+            linkmanList2.setAddTime(new Date());
+            linkmanListMapper.insertSelective(linkmanList2);
+        }
+    }
+
+    @Override
+    public void sendRefuseAddFriendMessageOneToOne(ChatEndPoint chatEndPoint, Message message) {
+        String fromUserNum = (String)chatEndPoint.getHttpSession().getAttribute("userNum");
+        String toUserNum = message.getToUserNum();
+        UnreadMessageExample unreadMessageExample = new UnreadMessageExample();
+        UnreadMessageExample.Criteria criteria = unreadMessageExample.createCriteria();
+        criteria.andToUserNumEqualTo(fromUserNum);
+        criteria.andFromUserNumEqualTo(toUserNum);
+        criteria.andMsgTypeCodeEqualTo(5);
+        List<UnreadMessage> unreadMessageList = unreadMessageMapper.selectByExample(unreadMessageExample);
+        unreadMessageMapper.deleteByExample(unreadMessageExample);
     }
 
     @Override

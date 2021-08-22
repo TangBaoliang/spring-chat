@@ -116,7 +116,13 @@ public class ChatEndPoint {
                 }break;
                 case 5:{
                     messageService.sendAddFriendMessageOneToOne(this, message1);
-                }
+                }break;
+                case 6:{
+                    messageService.sendAgreeAddFriendMessageOneToOne(this, message1);
+                }break;
+                case 7:{
+                    messageService.sendRefuseAddFriendMessageOneToOne(this, message1);
+                }break;
             }
 
 
