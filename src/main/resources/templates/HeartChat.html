@@ -25,9 +25,9 @@
 <body style="overflow: hidden">
 	<div class="window">
 		<div class="home-part">
-			<div id="chatmsg" class="home-part-navi"></div>
+			<div id="chatmsg" class="home-part-navi"><span class="navi-count"></span></div>
 			<div class="home-part-navi"></div>
-			<div id="applymsg" class="home-part-navi"></div>
+			<div id="applymsg" class="home-part-navi"><span class="navi-count"></span></div>
 			<div class="home-part-navi" id="add-btn" tabindex="10">
 				<div id="add-list">
 					<div class="add-list-item" id="add-friend-btn">+添加好友</div>
@@ -92,8 +92,17 @@
 					<div class="message-count"></div>
 				</div>
 			</div>
-			<div id="systeminfo" class="links-box beautiful-scrollbar" style="display: none">
 
+<!--			系统消息显示区域-->
+			<div id="systeminfo" class="links-box beautiful-scrollbar" style="display: none">
+				<div class='system-items' style="display:none" data-num="" data-type-code="">
+					<p class='system-items-p1'></p>
+					<p class="system-items-p2"></p>
+					<p class="system-items-p3">
+						<button class="refuse-btn">拒绝</button>
+						<button class="agree-btn">同意</button>
+					</p>
+				</div>
 			</div>
 		</div>
 

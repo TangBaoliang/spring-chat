@@ -91,9 +91,15 @@ $(document).ready(function (){
             }
         }
         else if(res["msgTypeCode"]==5){
-            $("#systeminfo").append("<div class='system-items'>"+"<p class='friend-comment-p'>"+ res["fromUserNum"]+'请求添加你为好友' +"</p>"+"<p>"+ res["message"] +"</p>"+"</div>"+"<div class='message-count'>"+"</div>");
+            $("#systeminfo").append("<div class='system-items'>"+"<p class='friend-comment-p'>"+ res["fromUserNum"]+'请求添加你为好友' +"</p>"+"<p>"+ res["message"] +"</p>"+"</div>");
         }
-
+        else if(res["msgTypeCode"]==8){
+            let str = "[data-Num='"+res['fromMemberNum']+"']";
+            let comment = $(str).find(".friend-comment-p").text()+" 邀你加入群聊";
+            let groupString = res["message"]+"("+res["fromUserNum"]+")";
+            // $("#systeminfo").append("<div class='system-items'>"+"<p class='friend-comment-p'>"+ comment +"</p>"+"<p>"+ groupString +"</p>"+"</div>");
+            addSystemItems(comment,groupString,res['fromMemberNum'],8);
+        }
     }
 
     //3.连接断开时出发的事件
@@ -229,6 +235,11 @@ $(document).ready(function (){
         $("#systeminfo").show(300);
         $(".message-part *").hide(300);
     })
+
+    // $(".refuse-btn"),on("click",function (){
+    //     let fromNum = $(this).parent().parent().attr("data-")
+    // })
+
     function sendReadConfirm(){
 
         //3代表此消息是已读消息确认
@@ -269,6 +280,17 @@ $(document).ready(function (){
         else{
             sessionStorage.setItem(key,value);
         }
+    }
+
+    function addSystemItems(p1Txt,p2Txt,dataFromNum,msgTypeCode){
+        let newSystemItem = $(".system-items:nth-of-type(1)").clone(true);
+        newSystemItem.find(".system-items-p1").text(p1Txt);
+        newSystemItem.find(".system-items-p2").text(p2Txt);
+        newSystemItem.attr("data-num",dataFromNum);
+        newSystemItem.attr("data-type-code",msgTypeCode);
+        newSystemItem.appendTo("#systeminfo");
+        newSystemItem.show();
+        $("#applymsg").find(".navi-count").show(200);
     }
 })
 

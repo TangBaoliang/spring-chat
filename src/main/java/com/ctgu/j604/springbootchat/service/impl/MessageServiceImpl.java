@@ -218,7 +218,7 @@ public class MessageServiceImpl implements MessageService {
                     }
                 }
                 else{
-                    msg = MessageUtils.getMessage(u.getMsgTypeCode(),u.getFromUserNum(),u.getContent(),u.getSendTime(),null);
+                    msg = MessageUtils.getMessage(u.getMsgTypeCode(),u.getFromUserNum(),u.getContent(),u.getSendTime(),u.getFromMemberNum());
                 }
 
                 try {
