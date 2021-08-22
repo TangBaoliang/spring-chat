@@ -2,15 +2,16 @@ package com.ctgu.j604.springbootchat.service.impl;
 
 import com.ctgu.j604.springbootchat.mapper.GroupAndMemberCommentMapper;
 import com.ctgu.j604.springbootchat.mapper.GroupAndUserMapper;
-import com.ctgu.j604.springbootchat.model.GroupAndMemberComment;
-import com.ctgu.j604.springbootchat.model.GroupAndMemberCommentExample;
-import com.ctgu.j604.springbootchat.model.GroupAndUser;
-import com.ctgu.j604.springbootchat.model.GroupAndUserExample;
+import com.ctgu.j604.springbootchat.mapper.GroupLinkUserMapper;
+import com.ctgu.j604.springbootchat.mapper.GroupMapper;
+import com.ctgu.j604.springbootchat.model.*;
 import com.ctgu.j604.springbootchat.service.GroupService;
+import com.ctgu.j604.springbootchat.utils.NumUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,6 +20,10 @@ public class GroupServiceImpl implements GroupService {
     private GroupAndUserMapper groupAndUserMapper;
     @Resource
     private GroupAndMemberCommentMapper groupAndMemberCommentMapper;
+    @Resource
+    private GroupMapper groupMapper;
+    @Resource
+    private GroupLinkUserMapper groupLinkUserMapper;
 
 
     @Override
@@ -52,4 +57,67 @@ public class GroupServiceImpl implements GroupService {
             return null;
         }
     }
+
+    @Override
+    public String createGroup(String groupName, TUser tUser) {
+        String num = null;
+        while(true){
+            num = NumUtils.getNumStringByCounts(8);
+            if(!checkGroupIfExist(num)){
+                break;
+            }
+        }
+        Group newGroup = new Group();
+        newGroup.setGroupNum(num);
+        newGroup.setGroupName(groupName);
+        newGroup.setCreateTime(new Date());
+        newGroup.setGroupMemberCount(1);
+        newGroup.setGroupMasterId(tUser.getUserId());
+        groupMapper.insertSelective(newGroup);
+
+        addMember(num,tUser.getUserId());
+        return num;
+    }
+
+    @Override
+    public boolean checkGroupIfExist(String groupNum) {
+        GroupExample groupExample = new GroupExample();
+        groupExample.createCriteria().andGroupNumEqualTo(groupNum);
+        List<Group> list = groupMapper.selectByExample(groupExample);
+        if (list.size()>0){
+            return true;
+        }
+        return false;
+
+    }
+
+    @Override
+    public boolean addMember(String groupNum, Integer userId) {
+        GroupAndUserExample groupAndUserExample = new GroupAndUserExample();
+        groupAndUserExample.createCriteria().andGroupNumEqualTo(groupNum);
+        groupAndUserExample.createCriteria().andUserIdEqualTo(userId);
+        List<GroupAndUser> groupAndUserList = groupAndUserMapper.selectByExample(groupAndUserExample);
+        if(groupAndUserList.size()>0){
+            return false;
+        }
+
+        GroupLinkUser groupLinkUser = new GroupLinkUser();
+        groupLinkUser.setAddTime(new Date());
+
+        GroupExample groupExample = new GroupExample();
+        groupExample.createCriteria().andGroupNumEqualTo(groupNum);
+
+        List<Group> list = groupMapper.selectByExample(groupExample);
+        if(list.size()<0){
+            return false;
+        }
+        groupLinkUser.setGroupId(list.get(0).getGroupId());
+        groupLinkUser.setUserId(userId);
+        if(groupLinkUserMapper.insert(groupLinkUser)>0){
+            return true;
+        }
+        return false;
+    }
+
+
 }

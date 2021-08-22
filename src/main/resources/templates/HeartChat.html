@@ -64,10 +64,17 @@
 					<p id="my-nickname" th:text="*{curUser.nickName}">这里显示昵称</p>
 					<p id="my-userNum" th:text="*{curUser.userNum}">这里显示账号</p>
 				</div>
+				<div id="group-create-box">
+					<div>请选择好友发起群聊</div>
+					<div id="group-add-cancel">取消</div>
+					<div id="group-add-confirm">发起</div>
+				</div>
 				<input id="link-search" type="text" placeholder="输入好友或群聊名称">
 			</div>
 			<div id="chattingmsg" class="links-box beautiful-scrollbar">
+				<form id="invite-form">
 				<div th:each="firend:${friendListInfoList}" th:data-Num="*{firend.userNum}" th:data-userNum="*{firend.userNum}" class="friend-items" th:title="*{firend.commentForFriend+'('+firend.nickName+')'}">
+					<input class="checkbox-for-friend" type="checkbox" name="toInviteFriends" th:value="*{firend.userNum}">
 					<img draggable="false" th:src="@{'/img/user-icon/'+*{firend.userNum}+'.jpg'}">
 					<div class="link-info">
 						<p class="friend-comment-p" th:text="*{firend.commentForFriend}">这里显示好友备注</p>
@@ -75,6 +82,7 @@
 					</div>
 					<div class="message-count"></div>
 				</div>
+				</form>
 				<div th:each="group:${groupAndUserList}" th:data-Num="*{group.groupNum}" th:data-groupNum="*{group.groupNum}" class="group-items" th:title="*{group.groupName+'('+group.groupNum+')'}">
 					<img draggable="false" th:src="@{'/img/user-icon/'+*{group.groupNum}+'.jpg'}">
 					<div class="link-info">
@@ -87,7 +95,6 @@
 			<div id="systeminfo" class="links-box beautiful-scrollbar" style="display: none">
 
 			</div>
-
 		</div>
 
 		<div class="message-part">
@@ -182,39 +189,5 @@
 	<script src="/js/jquery-3.6.0.js"></script>
 	<script src="/js/chat.js"></script>
 	<script src="/js/modifyPage.js"></script>
-	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-<!--	<script>-->
-<!--		$(function(){-->
-<!--			let validateUrl = "http://" + window.location.host.toString() + "/search";-->
-<!--			let AddUrl = "http://" + window.location.host.toString() + "/add";-->
-<!--			$("#submit").click(function(){-->
-<!--				$.ajax({-->
-<!--					type: "POST",-->
-<!--					url: "/search",-->
-<!--					data: $("#Search").serialize(),-->
-<!--					dataType: "json",-->
-<!--					success: function(data){-->
-<!--						$(".user_table").html("");-->
-<!--						$(".remindinfo").html("");-->
-<!--						if(data.length === 0){-->
-<!--							$(".remindinfo").html("不存在此用户");-->
-<!--						}-->
-<!--						else{-->
-<!--							for (let i=0; i<data.length; i++) {-->
-<!--								$(".user_table").append("<tr>" + "<td>"+data[i].userNum +"</td>"+"<td>"+data[i].nickName+"</td>"+ "<td>"+"<input id='addfriend' data-num='"+data[i].userNum+ "' value='+ 好友' type='button'>"+"</td>"+"</tr>");-->
-<!--							}-->
-<!--							$("#addfriend").on("click",function(){-->
-<!--								let preMsg = $("#checkmsg").val();-->
-<!--								$("checkmsg").val('');-->
-<!--								chatType = 5;-->
-<!--								let json = {"msgTypeCode":chatType,"toUserNum":this.getAttribute("data-num"),"message":preMsg,"sendTime":new Date().getTime()};-->
-<!--								ws.send(JSON.stringify(json));-->
-<!--							})-->
-<!--						}-->
-<!--					}-->
-<!--				})-->
-<!--			})-->
-<!--		})-->
-<!--	</script>-->
 </body>
 </html>

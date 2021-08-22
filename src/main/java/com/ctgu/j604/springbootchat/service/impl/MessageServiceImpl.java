@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -60,6 +61,30 @@ public class MessageServiceImpl implements MessageService {
             }
         }
 
+    }
+
+    @Override
+    public void sendInviteMessage(TUser tUser, String[] toInviteNums, String groupNum, String groupName) {
+        UnreadMessage unreadMessage = new UnreadMessage();
+        unreadMessage.setMsgTypeCode(8);
+        unreadMessage.setFromMemberNum(tUser.getUserNum());
+        unreadMessage.setSendTime(new Date());
+        unreadMessage.setContent(groupName);
+        unreadMessage.setFromUserNum(groupNum);
+        for (String toUserNum:
+             toInviteNums) {
+            unreadMessage.setToUserNum(toUserNum);
+            unreadMessageMapper.insert(unreadMessage);
+            ChatEndPoint objectChatEndPoint = ChatEndPoint.onlineUserPoint.get(toUserNum);
+            if(objectChatEndPoint!=null){
+                String resultMessage = MessageUtils.getMessage(8,groupNum,groupName,new Date(),tUser.getUserNum());
+                try {
+                    objectChatEndPoint.getSession().getBasicRemote().sendText(resultMessage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override

@@ -165,6 +165,7 @@ body{
 }
 
 .list-header{
+    overflow: hidden;
     padding-left: 55px;
     box-sizing: border-box;
     z-index: 98;
@@ -188,7 +189,7 @@ body{
     height: 90px;
     padding-top: 20px;
     box-sizing: border-box;
-    margin:0 0 59px 0;
+    margin:0;
     overflow: hidden;
 }
 .list-header p{
@@ -203,10 +204,13 @@ body{
 .list-header input{
     display: block;
     height: 30px;
-    width: 100%;
+    width: 50%;
     outline: none;
     border:none;
     box-sizing: border-box;
+    position: absolute;
+    bottom: 1px;
+
 }
 .links-box{
     padding-top: 180px;
@@ -220,6 +224,7 @@ body{
 
 .friend-items,.group-items,.system-items{
     width: 100%;
+    min-width: 400px;
     height: 70px;
     box-sizing: border-box;
     margin-left: 3px;
@@ -250,7 +255,13 @@ body{
 .friend-items:hover,.group-items:hover, .system-items:hover{
     background-color: #eeecec;
 }
-
+.checkbox-for-friend{
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin:25px 0 25px 0;
+    display: none;
+}
 .message-box-header{
     width: 100%;
     height: 8%;
@@ -316,8 +327,8 @@ div>button{
     margin: 10px 10px 10px 10px;
 }
 .link-info{
-    margin: 15px 0 15px 70px;
-    position: absolute;
+    float: left;
+    margin: 15px 0 15px 0;
     height: 40px;
     overflow: hidden;
 }
@@ -438,4 +449,38 @@ pre{
 .comment-label-others{
     left: 0;
     background-color: #c98100;
+}
+
+#group-create-box{
+    color: white;
+    min-width: 300px;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #fd8908;
+    border-radius: 6px;
+    box-sizing: border-box;
+    display: none;
+}
+#group-create-box>div{
+    float: left;
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 6px;
+    transition: ease 0.4s;
+}
+#group-create-box>div:nth-of-type(1){
+    width: 50%;
+    overflow: hidden;
+}
+#group-create-box>div:nth-of-type(2){
+    width: 25%;
+}
+#group-create-box>div:nth-of-type(3){
+    width: 25%;
+}
+#group-create-box>div:hover{
+    background-color:#ffa33c ;
 }
