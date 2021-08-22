@@ -31,7 +31,7 @@ let curChatUserNum='';
 
 $(document).ready(function (){
 
-    //隐藏聊天窗口
+    //隐藏聊天窗口**
     $(".message-part *").hide();
 
     //全局变量，方便添加元素
