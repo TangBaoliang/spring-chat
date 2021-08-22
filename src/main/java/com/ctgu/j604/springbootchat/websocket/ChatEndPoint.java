@@ -1,7 +1,9 @@
 package com.ctgu.j604.springbootchat.websocket;
 
 import com.ctgu.j604.springbootchat.SpringbootChatApplication;
+import com.ctgu.j604.springbootchat.model.TUser;
 import com.ctgu.j604.springbootchat.service.MessageService;
+import com.ctgu.j604.springbootchat.service.TUserService;
 import com.ctgu.j604.springbootchat.service.impl.MessageServiceImpl;
 import com.ctgu.j604.springbootchat.utils.Message;
 import com.ctgu.j604.springbootchat.utils.MessageUtils;
@@ -32,9 +34,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ChatEndPoint {
 
     public static MessageService messageService;
+    public static TUserService tUserService;
 
-    @Autowired public void setChatService(MessageService messageService) {
+    @Autowired public void setChatService(MessageService messageService, TUserService tUserService) {
         ChatEndPoint.messageService = messageService;
+        ChatEndPoint.tUserService = tUserService;
     }
 
     //用来存储每一个客户端对象对应的ChatEndPoint对象,一般通过能唯一表示客户的字段做键名
@@ -89,7 +93,6 @@ public class ChatEndPoint {
     }
 
 
-    //这里使用的Set集合特点是容器内不会出现重复的集合
 
 
 
@@ -123,6 +126,12 @@ public class ChatEndPoint {
                 case 7:{
                     messageService.sendRefuseAddFriendMessageOneToOne(this, message1);
                 }break;
+                case 9:{
+                    tUserService.agreeAddGroup((TUser)this.getHttpSession().getAttribute("curUser"),message1.getToUserNum());
+                }break;
+                case 10:{
+                    tUserService.refuseAddGroup((TUser)this.getHttpSession().getAttribute("curUser"),message1.getToUserNum());
+                }
             }
 
 

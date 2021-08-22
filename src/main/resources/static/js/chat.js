@@ -98,7 +98,7 @@ $(document).ready(function (){
             let comment = $(str).find(".friend-comment-p").text()+" 邀你加入群聊";
             let groupString = res["message"]+"("+res["fromUserNum"]+")";
             // $("#systeminfo").append("<div class='system-items'>"+"<p class='friend-comment-p'>"+ comment +"</p>"+"<p>"+ groupString +"</p>"+"</div>");
-            addSystemItems(comment,groupString,res['fromMemberNum'],8,res["sendTime"]);
+            addSystemItems(comment,groupString,res['fromUserNum'],8,res["sendTime"]);
         }
     }
 
@@ -300,8 +300,11 @@ $(document).ready(function (){
             else if(typeCode==8){
                 typeCode=10;
             }
+
+            $(this).parent().parent().fadeOut(500);
             let json = {"msgTypeCode":typeCode,"toUserNum":fromNum,"message":"","sendTime":new Date().getTime()};
             ws.send(JSON.stringify(json));
+
         })
 
         $(".agree-btn").on("click",function(){
@@ -313,6 +316,7 @@ $(document).ready(function (){
             else if(typeCode==8){
                 typeCode=9;
             }
+            $(this).parent().parent().fadeOut(500);
             let json = {"msgTypeCode":typeCode,"toUserNum":fromNum,"message":"","sendTime":new Date().getTime()};
             ws.send(JSON.stringify(json));
         })
@@ -321,9 +325,9 @@ $(document).ready(function (){
     function stampToStr(stamp){
         let time = new Date(stamp);
         let str = '';
-        let day = time.getDay();
-        str+=time.getFullYear()+'-'+(time.getMonth()+1)+'-'+time.getDay();
+        str+=time.getFullYear()+'-'+(time.getMonth()+1)+'-'+time.getDate();
         return str;
     }
+
 })
 

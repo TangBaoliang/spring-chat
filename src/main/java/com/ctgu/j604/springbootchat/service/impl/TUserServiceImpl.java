@@ -1,15 +1,13 @@
 package com.ctgu.j604.springbootchat.service.impl;
 
-import com.ctgu.j604.springbootchat.mapper.FriendListInfoMapper;
-import com.ctgu.j604.springbootchat.mapper.TUserMapper;
-import com.ctgu.j604.springbootchat.model.FriendListInfo;
-import com.ctgu.j604.springbootchat.model.FriendListInfoExample;
-import com.ctgu.j604.springbootchat.model.TUser;
-import com.ctgu.j604.springbootchat.model.TUserExample;
+import com.ctgu.j604.springbootchat.mapper.*;
+import com.ctgu.j604.springbootchat.model.*;
+import com.ctgu.j604.springbootchat.service.GroupService;
 import com.ctgu.j604.springbootchat.service.TUserService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,14 +17,18 @@ public class TUserServiceImpl implements TUserService {
 
     @Resource
     private FriendListInfoMapper friendListInfoMapper;
+    @Resource
+    private UnreadMessageMapper unreadMessageMapper;
+    @Resource
+    private GroupService groupService;
+
 
     @Override
     public TUser login(TUser loginUser) {
         TUserExample tUserExample = new TUserExample();
 
         TUserExample.Criteria criteriaNumLogin = tUserExample.or();
-        criteriaNumLogin.andUserNumEqualTo(loginUser.getUserNum());
-        criteriaNumLogin.andPasswordEqualTo(loginUser.getPassword());
+        criteriaNumLogin.andUserNumEqualTo(loginUser.getUserNum()).andPasswordEqualTo(loginUser.getPassword());
 
 
 
@@ -48,7 +50,7 @@ public class TUserServiceImpl implements TUserService {
         }
 
         List<TUser> list = tUserMapper.selectByExample(tUserExample);
-        if(0!=list.size()){
+        if(list!=null && 0<list.size()){
             return list.get(0);
         }
         else {
@@ -97,5 +99,25 @@ public class TUserServiceImpl implements TUserService {
             tUserExample.or().andNickNameEqualTo(tUser.getNickName()).andAgeBetween(ageBegin, ageEnd);
         }
         return tUserMapper.selectByExample(tUserExample);
+    }
+
+    @Override
+    public void agreeAddGroup(TUser tUser, String toUserNum) {
+        UnreadMessageExample unreadMessageExample = new UnreadMessageExample();
+        unreadMessageExample.createCriteria().andFromUserNumEqualTo(toUserNum).andToUserNumEqualTo(tUser.getUserNum());
+        List<UnreadMessage> list = unreadMessageMapper.selectByExample(unreadMessageExample);
+        if(list!=null && list.size()>0){
+            unreadMessageMapper.deleteByExample(unreadMessageExample);
+            groupService.addMember(toUserNum,tUser.getUserId());
+        }
+        else{
+            return;
+        }
+    }
+
+    public void refuseAddGroup(TUser tUser,String toUserNum){
+        UnreadMessageExample unreadMessageExample = new UnreadMessageExample();
+        unreadMessageExample.createCriteria().andFromUserNumEqualTo(toUserNum).andToUserNumEqualTo(tUser.getUserNum());
+        unreadMessageMapper.deleteByExample(unreadMessageExample);
     }
 }

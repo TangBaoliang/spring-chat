@@ -73,6 +73,16 @@
 			</div>
 			<div id="chattingmsg" class="links-box beautiful-scrollbar">
 				<form id="invite-form">
+
+				<div data-Num="" data-userNum="" class="friend-items" title="" style="display: none">
+					<input class="checkbox-for-friend" type="checkbox" name="toInviteFriends" value="">
+					<img draggable="false" src="">
+					<div class="link-info">
+						<p class="friend-comment-p" >这里显示好友备注</p>
+						<p class="nickname-p">这里显示好友昵称</p>
+					</div>
+				<div class="message-count"></div>
+				</div>
 				<div th:each="firend:${friendListInfoList}" th:data-Num="*{firend.userNum}" th:data-userNum="*{firend.userNum}" class="friend-items" th:title="*{firend.commentForFriend+'('+firend.nickName+')'}">
 					<input class="checkbox-for-friend" type="checkbox" name="toInviteFriends" th:value="*{firend.userNum}">
 					<img draggable="false" th:src="@{'/img/user-icon/'+*{firend.userNum}+'.jpg'}">

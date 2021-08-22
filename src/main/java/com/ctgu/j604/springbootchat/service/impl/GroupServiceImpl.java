@@ -50,7 +50,7 @@ public class GroupServiceImpl implements GroupService {
         GroupAndMemberCommentExample groupAndMemberCommentExample = new GroupAndMemberCommentExample();
         groupAndMemberCommentExample.createCriteria().andGroupNumEqualTo(groupNum).andUserIdEqualTo(userId);
         List<GroupAndMemberComment> list = groupAndMemberCommentMapper.selectByExample(groupAndMemberCommentExample);
-        if (list!=null){
+        if (list!=null && list.size()>0){
             return list.get(0).getMemberComment();
         }
         else{
@@ -84,7 +84,7 @@ public class GroupServiceImpl implements GroupService {
         GroupExample groupExample = new GroupExample();
         groupExample.createCriteria().andGroupNumEqualTo(groupNum);
         List<Group> list = groupMapper.selectByExample(groupExample);
-        if (list.size()>0){
+        if (list!=null && list.size()>0){
             return true;
         }
         return false;
@@ -94,10 +94,9 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public boolean addMember(String groupNum, Integer userId) {
         GroupAndUserExample groupAndUserExample = new GroupAndUserExample();
-        groupAndUserExample.createCriteria().andGroupNumEqualTo(groupNum);
-        groupAndUserExample.createCriteria().andUserIdEqualTo(userId);
+        groupAndUserExample.createCriteria().andGroupNumEqualTo(groupNum).andUserIdEqualTo(userId);
         List<GroupAndUser> groupAndUserList = groupAndUserMapper.selectByExample(groupAndUserExample);
-        if(groupAndUserList.size()>0){
+        if(groupAndUserList!=null && groupAndUserList.size()>0){
             return false;
         }
 
@@ -108,7 +107,7 @@ public class GroupServiceImpl implements GroupService {
         groupExample.createCriteria().andGroupNumEqualTo(groupNum);
 
         List<Group> list = groupMapper.selectByExample(groupExample);
-        if(list.size()<0){
+        if(list!=null && list.size()<=0){
             return false;
         }
         groupLinkUser.setGroupId(list.get(0).getGroupId());

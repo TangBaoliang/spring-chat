@@ -10,4 +10,6 @@ public interface TUserService {
     List<FriendListInfo> getAllFriend(Integer userId);
     List<TUser> getTUserByUserNumAndAgeAndSex(TUser tUser, Integer ageBegin, Integer ageEnd);
     List<TUser> getTUserByNickNameAndAgeAndSex(TUser tUser, Integer ageBegin, Integer ageEnd);
+    void agreeAddGroup(TUser tUser, String toUserNum);
+    void refuseAddGroup(TUser tUser, String toUserNum);
 }
