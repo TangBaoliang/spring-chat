@@ -6,7 +6,7 @@ public class Result {
     private boolean flag;
     private String message;
     public static final String WRONG_ACCOUNT_OR_PASSWORD = "用户名或密码错误";
-
+    public static final String REPEAT_INFORMATION = "邮箱||用户名||账号重复";
 
     public Result(){
 

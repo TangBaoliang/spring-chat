@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -45,11 +45,10 @@
                         <div class="form-group">
                             <button id="submit" type="button" class="btn btn-default"><i
                                     class="fa fa-arrow-right">Login</i></button>
-                            <span>No account yet? <br><a th:href="@{/templates/register.html}" class="create_account">Register for one now !!!!</a></span>
+                            <span>No account yet? <br><a href="/register.html" class="create_account">Register for one now !!!!</a></span>
                         </div>
                         <div class="htmleaf-links register">
-                            <a th:href="@{/templates/register.html}" target="_blank">点击注册</a>
-                            <a href="https://www.cygao.top/" target="_blank"><span>关于作者</span></a>
+                            <a href="/register.html" target="_blank">点击注册</a>
                         </div>
                     </form>
                 </div>

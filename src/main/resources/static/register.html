@@ -29,7 +29,7 @@
 
             <div class="row">
                 <div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
-                    <form id="login-form" method="post" action="/register" th:action="@{/register}" class="form-horizontal"
+                    <form id="login-form"  method="post" action="/register" th:action="@{/register}" class="form-horizontal"
                           onkeydown="if(event.keyCode===13){return false;}">
                         <div class="heading">Register here</div>
                         <div class="form-group">
@@ -40,16 +40,18 @@
                         </div>
                         <div class="form-group">
                             <i class="fa fa-lock"></i><input id="password" required name="password" type="password"
-                                                             class="form-control" placeholder="Password"/>
-                            <span id="pwd2check"></span>
+                                                             class="form-control" placeholder="Password" onblur="pwdsizecheck()"/>
+                            <span id="pwdsizecheck"></span>
                         </div>
                         <div class="form-group">
                             <i class="fa fa-lock"></i><input id="confirmPassword" required name="Confirmpassword" type="password"
-                                                             class="form-control" placeholder="ConfirmPassword"/>
+                                                             class="form-control" placeholder="ConfirmPassword" onblur="pwdcheck()"/>
+                            <span id="pwd2check"></span>
                         </div>
                         <div class="form-group">
                             <i class="fa fa-envelope"></i><input id="email" required name="email" type="text"
-                                                             class="form-control" placeholder="email"/>
+                                                             class="form-control" placeholder="email" onblur="emailcheck()"/>
+                            <span id="email2check"></span>
                         </div>
                         <div id="remind-info"></div>
                         <div class="form-group">
@@ -68,7 +70,7 @@
     $(function () {
         let validateUrl = "http://" + window.location.host.toString() + "/register";
         let mainUrl = "http://" + window.location.host.toString() + "/main";
-        let loginUrl = "http://" + window.location.host.toString() + "/login";
+        let loginUrl = "http://" + window.location.host.toString() + "/login.html";
         $("#submit").click(function () {
             $.ajax({
                 type: "POST",
@@ -92,10 +94,19 @@
         var nick=document.getElementById("nickName").value;
         var nickcheck=document.getElementById("nickNamecheck");
         if(/^[a-zA-Z0-9_-]{4,20}$/.test(nick)){
-            nickcheck.innerHTML="年龄格式正确";
+            nickcheck.innerHTML="昵称格式正确";
         }
         else{
             nickcheck.innerHTML="<font color='red'>昵称格式不正确<font>";
+        }
+    }
+    function pwdsizecheck() {
+        var pwd1 = document.getElementById("password").value;
+        var pwdsizecheck = document.getElementById("pwdsizecheck");
+        if(/^(\w){6,20}$/.test(pwd1))
+            pwdsizecheck.innerHTML="密码格式合适";
+        else {
+            pwdsizecheck.innerHTML="密码格式不被允许"
         }
     }
     function pwdcheck() {
@@ -108,8 +119,19 @@
             pwd2check.innerHTML = "两次密码一致";
         }
     }
+    function  emailcheck() {
+      var email=document.getElementById("email").value;
+      var email2check=document.getElementById("email2check");
+      if(  /^[A-Za-zd0-9]+([-_.][A-Za-zd]+)*@([A-Za-zd]+[-.])+[A-Za-zd]{2,5}$/.test(email)){
+          email2check.innerHTML="邮箱格式正确";
+      }
+      else{
+          email2check.innerHTML="<font color='red'>邮箱格式不正确<font>";
+      }
+    }
 
 </script>
+
 <style type="text/css">
     .demo {
         padding: 20px 0;

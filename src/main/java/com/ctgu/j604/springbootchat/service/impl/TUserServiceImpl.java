@@ -23,30 +23,29 @@ public class TUserServiceImpl implements TUserService {
     @Override
     public TUser login(TUser loginUser) {
         TUserExample tUserExample = new TUserExample();
-        tUserExample.createCriteria().andUserNumEqualTo(loginUser.getUserNum()).andPasswordEqualTo(loginUser.getPassword());
 
-//        TUserExample.Criteria criteriaNumLogin = tUserExample.or();
-//        criteriaNumLogin.andUserNumEqualTo(loginUser.getUserNum());
-//        criteriaNumLogin.andPasswordEqualTo(loginUser.getPassword());
+        TUserExample.Criteria criteriaNumLogin = tUserExample.or();
+        criteriaNumLogin.andUserNumEqualTo(loginUser.getUserNum());
+        criteriaNumLogin.andPasswordEqualTo(loginUser.getPassword());
 
 
 
 
         //匹配电话号码登录
-//        if(null!=loginUser.getPhoneNum()){
-//            TUserExample.Criteria criteriaPhoneLogin = tUserExample.or();
-//            criteriaPhoneLogin.an dPhoneNumEqualTo(loginUser.getPhoneNum());
-//            criteriaPhoneLogin.andPasswordEqualTo(loginUser.getPassword());
-//        }
-//
-//
-//
-//        //匹配邮箱密码登录
-//        if(null!=loginUser.getEmail()){
-//            TUserExample.Criteria criteriaEmailLogin = tUserExample.or();
-//            criteriaEmailLogin.andEmailEqualTo(loginUser.getEmail());
-//            criteriaEmailLogin.andPasswordEqualTo(loginUser.getPassword());
-//        }
+        if(null!=loginUser.getPhoneNum()){
+            TUserExample.Criteria criteriaPhoneLogin = tUserExample.or();
+            criteriaPhoneLogin.andPhoneNumEqualTo(loginUser.getPhoneNum());
+            criteriaPhoneLogin.andPasswordEqualTo(loginUser.getPassword());
+        }
+
+
+
+        //匹配邮箱密码登录
+        if(null!=loginUser.getEmail()){
+            TUserExample.Criteria criteriaEmailLogin = tUserExample.or();
+            criteriaEmailLogin.andEmailEqualTo(loginUser.getEmail());
+            criteriaEmailLogin.andPasswordEqualTo(loginUser.getPassword());
+        }
 
         List<TUser> list = tUserMapper.selectByExample(tUserExample);
         if(0!=list.size()){

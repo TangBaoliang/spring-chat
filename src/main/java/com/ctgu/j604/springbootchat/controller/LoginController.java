@@ -20,6 +20,9 @@ public class LoginController {
         if(null==user){
             return null;
         }
+        user.setEmail(user.getUserNum());
+        user.setPhoneNum(user.getUserNum());
+        user.setNickName(user.getUserNum());
         TUser tUser = tUserService.login(user);
         if(null!=tUser){
             request.getSession().setAttribute("curUserId",tUser.getUserId());
