@@ -1,0 +1,40 @@
+$("#submit").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/search",
+            data: $("#Search").serialize(),
+            dataType: "json",
+            success: function(data){
+                $(".user_table").html("");
+                $(".remindinfo").html("");
+                if(data.length === 0){
+                    $(".remindinfo").html("不存在此用户");
+                }
+                else{
+                    for (let i=0; i<data.length; i++) {
+                        $(".user_table").append("<tr>" + "<td>"+data[i].userNum +"</td>"+"<td>"+data[i].nickName+"</td>"+ "<td>"+"<input id='addfriend' data-num='"+data[i].userNum+ "' value='+ 好友' type='button'>"+"</td>"+"</tr>");
+                    }
+                    $("#addfriend").on("click",function(){
+                        let preMsg = $("#checkmsg").val();
+                        $("checkmsg").val('');
+                        chatType = 5;
+                        let json = {"msgTypeCode":chatType,"toUserNum":this.getAttribute("data-num"),"message":preMsg,"sendTime":new Date().getTime()};
+                        ws.send(JSON.stringify(json));
+                        $("#systeminfo").append("<div class='system-items'>"+"<p class='friend-comment-p'>"+  +"</p>"+"<p class='nickname-p'>"+  +"</p>"+"<p>"+ preMsg +"</p>"+"</div>"+"<div class='message-count'>"+"</div>");
+                    })
+                }
+            }
+        })
+    })
+
+    $("#chatmsg").click(function(){
+            $("#systeminfo").hide(300);
+            $("#chattingmsg").show(300);
+            $(".message-part *").hide(300);
+        })
+
+        $("#applymsg").click(function(){
+            $("#chattingmsg").hide(300);
+            $("#systeminfo").show(300);
+            $(".message-part *").hide(300);
+        })
