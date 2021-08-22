@@ -91,7 +91,7 @@ $(document).ready(function (){
             }
         }
         else if(res["msgTypeCode"]==5){
-            $("#systeminfo").append("<div class='system-items'>"+"<p class='friend-comment-p'>"+ res["fromUserNum"]+'请求添加你为好友' +"</p>"+"<p>"+ res["message"] +"</p>"+"</div>");
+            addSystemItems(res['fromUserNum']+"请求添加你为好友", res["message"], res['fromUserNum'], res["msgTypeCode"]);
         }
         else if(res["msgTypeCode"]==8){
             let str = "[data-Num='"+res['fromMemberNum']+"']";
@@ -199,7 +199,6 @@ $(document).ready(function (){
                         chatType = 5;
                         let json = {"msgTypeCode":chatType,"toUserNum":this.getAttribute("data-num"),"message":preMsg,"sendTime":new Date().getTime()};
                         ws.send(JSON.stringify(json));
-                        // $("#systeminfo").append("<div class='system-items'>"+"<p class='friend-comment-p'>"+  +"</p>"+"<p class='nickname-p'>"+  +"</p>"+"<p>"+ preMsg +"</p>"+"</div>"+"<div class='message-count'>"+"</div>");
                     })
                 }
             }
