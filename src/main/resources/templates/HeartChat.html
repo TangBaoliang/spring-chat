@@ -2,6 +2,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="css/SearchFriends.css"/>
 	<link rel="stylesheet" type="text/css" href="css/heartChat.css"/>
 	<link rel="stylesheet" href="css/modifyInfoPage.css" type="text/css">
 	<link rel="icon" href="img/chat-icon.png" type="image/x-icon">
@@ -21,12 +22,12 @@
 		}
 	</style>
 </head>
-<body>
+<body style="overflow: hidden">
 	<div class="window">
 		<div class="home-part">
-			<div class="home-part-navi"></div>
+			<div id="chatmsg" class="home-part-navi"></div>
 			<div class="home-part-navi"></div>
-			<div class="home-part-navi"></div>
+			<div id="applymsg" class="home-part-navi"></div>
 			<div class="home-part-navi" id="add-btn" tabindex="10">
 				<div id="add-list">
 					<div class="add-list-item" id="add-friend-btn">+添加好友</div>
@@ -70,7 +71,7 @@
 				</div>
 				<input id="link-search" type="text" placeholder="输入好友或群聊名称">
 			</div>
-			<div class="links-box beautiful-scrollbar">
+			<div id="chattingmsg" class="links-box beautiful-scrollbar">
 				<form id="invite-form">
 				<div th:each="firend:${friendListInfoList}" th:data-Num="*{firend.userNum}" th:data-userNum="*{firend.userNum}" class="friend-items" th:title="*{firend.commentForFriend+'('+firend.nickName+')'}">
 					<input class="checkbox-for-friend" type="checkbox" name="toInviteFriends" th:value="*{firend.userNum}">
@@ -91,7 +92,9 @@
 					<div class="message-count"></div>
 				</div>
 			</div>
+			<div id="systeminfo" class="links-box beautiful-scrollbar" style="display: none">
 
+			</div>
 		</div>
 
 		<div class="message-part">
@@ -116,10 +119,71 @@
 	<div id="friend-add-window">
 		<div id="window-head">
 			添加好友
+
 			<div id="window-close-btn">&times;</div>
 		</div>
 		<div id="window-body">
+			<div class="title">
+				<div class="title1">
+					<h1 class="headline1">查找好友/群组</h1>
+				</div>
+				<div class="title2">
+					<a href="SearchFriend.html"><h1 class="headline2">找人</h1></a>
+					<div></div>
+				</div>
+				<div class="title3">
+					<a href="SearchGroup.html"><h1 class="headline3">找群</h1></a>
+					<div></div>
+				</div>
+				<div class="title4"></div>
+				<div class="title5">
+					<a><h1 class="headline4">返回主页</h1></a>
+					<div></div>
+				</div>
+			</div>
+			<div class="total">
+				<form id="Search" method="post">
+					<div class="search">
+						<input type="text" name="userNum" placeholder="请输入QQ号码/昵称" class="searchfriends">
+					</div>
+					<div class="btn">
+						<input id="submit" type="button" value="查找" class="btnSearch">
+						<div class="remindinfo"></div>
+					</div>
+					<div class="Select">
+						<select class="select1" name="sex">
+							<option selected hidden disabled>性别</option>
+							<option value="">不限</option>
+							<option value="男">男</option>
+							<option value="女">女</option>
+						</select>
+						<select class="select2" name="age">
+							<option selected hidden disabled>年龄</option>
+							<option value="">不限</option>
+							<option value="1">16-20岁</option>
+							<option value="2">21-25岁</option>
+						</select>
+					</div>
+				</form>
+				<div style="width: 40%;height: 60px;float: left;">
+					<label id="label1">验证消息</label>
+					<input id="checkmsg" type="text">
+				</div>
+				<div class="table1">
+					<table class="user">
+						<thead>
+						<tr>
+							<td>QQ号码</td>
+							<td>昵称</td>
+							<td>添加好友</td>
+						</tr>
+						</thead>
+						<tbody class="user_table">
 
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</div>
 	<script src="/js/jquery-3.6.0.js"></script>
