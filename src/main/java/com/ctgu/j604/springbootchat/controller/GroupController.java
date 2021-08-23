@@ -4,6 +4,7 @@ import com.ctgu.j604.springbootchat.model.TUser;
 import com.ctgu.j604.springbootchat.service.GroupService;
 import com.ctgu.j604.springbootchat.service.MessageService;
 import com.ctgu.j604.springbootchat.utils.Result;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ public class GroupController {
     private MessageService messageService;
 
     @PostMapping("/group/create")
+    @Transactional
     public Result createGroup(HttpServletRequest request,@RequestBody String[] toInviteUserNums,String groupName){
         TUser tUser = (TUser) request.getSession().getAttribute("curUser");
         if (groupName==null || groupName.equals("")){

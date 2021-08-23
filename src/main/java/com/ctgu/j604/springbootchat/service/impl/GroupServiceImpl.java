@@ -8,6 +8,7 @@ import com.ctgu.j604.springbootchat.model.*;
 import com.ctgu.j604.springbootchat.service.GroupService;
 import com.ctgu.j604.springbootchat.utils.NumUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class GroupServiceImpl implements GroupService {
     private GroupMapper groupMapper;
     @Resource
     private GroupLinkUserMapper groupLinkUserMapper;
+
 
 
     @Override
@@ -59,6 +61,7 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
+    @Transactional
     public String createGroup(String groupName, TUser tUser) {
         String num = null;
         while(true){

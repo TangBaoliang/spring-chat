@@ -38,7 +38,10 @@
 			<div id="setting-icon"></div>
 
 			<div id="modify-part">
-				<div><img id="my-chat-head-big" th:src="@{'/img/user-icon/'+*{curUser.getUserNum()}+'.jpg'}"></div>
+				<div id="my-chat-head-big">
+					<img th:src="@{'/img/user-icon/'+*{curUser.getUserNum()}+'.jpg'}">
+					<div id="head-cover">点击上传头像</div>
+				</div>
 				<form>
 					<input id="file-input" type="file" name="userIcon">
 					<div><input id="icon-submit-btn" type="button" value="提交"></div>
@@ -80,7 +83,7 @@
 					</div>
 				<div class="message-count"></div>
 				</div>
-				<div th:each="firend:${friendListInfoList}" th:data-Num="*{firend.userNum}" th:data-userNum="*{firend.userNum}" class="friend-items" th:title="*{firend.commentForFriend+'('+firend.nickName+')'}">
+				<div th:each="firend:${friendListInfoList}" th:data-Num="*{firend.userNum}" th:data-userNum="*{firend.userNum}" class="friend-items clearfix" th:title="*{firend.commentForFriend+'('+firend.nickName+')'}">
 					<input class="checkbox-for-friend" type="checkbox" name="toInviteFriends" th:value="*{firend.userNum}">
 					<img draggable="false" th:src="@{'/img/user-icon/'+*{firend.userNum}+'.jpg'}">
 					<div class="link-info">
@@ -88,6 +91,13 @@
 						<p class="nickname-p" th:text="*{firend.nickName}">这里显示好友昵称</p>
 					</div>
 					<div class="message-count"></div>
+					<div class="operation-list">
+						<a class="modify-comment-btn">修改备注</a>
+						<a class="view-detail-btn">查看名片</a>
+						<a class="delete-friend-btn">删除好友</a>
+					</div>
+					<div class="more-btn">•••</div>
+					<input class="new-comment-input" th:value="*{firend.commentForFriend}" type="text"/>
 				</div>
 				</form>
 				<div th:each="group:${groupAndUserList}" th:data-Num="*{group.groupNum}" th:data-groupNum="*{group.groupNum}" class="group-items" th:title="*{group.groupName+'('+group.groupNum+')'}">
@@ -97,6 +107,13 @@
 						<p class="nickname-p" th:text="*{group.groupNum}">这里显示群号码</p>
 					</div>
 					<div class="message-count"></div>
+					<div class="operation-list">
+						<a class="modify-group-comment-btn">修改我的群昵称</a>
+						<a class="view-group-detail-btn">查看群名片</a>
+						<a class="exit-group-btn">退出群聊</a>
+					</div>
+					<div class="more-btn">•••</div>
+					<input class="new-group-comment-input" th:value="${group.memberComment}" type="text"/>
 				</div>
 			</div>
 

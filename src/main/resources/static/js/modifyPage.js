@@ -92,6 +92,7 @@ $(document).ready(function (){
     });
     $('#icon-submit-btn').on('click', function(event) {
         let filename = null;
+        $(this).hide();
         try {
             filename = file.name.split('.')[1];
         } catch (error) {
@@ -137,4 +138,72 @@ $(document).ready(function (){
         });
     });
     /**********************************end头像上传以及预览*********************************/
+
+
+    $(".more-btn").on("click",function (e){
+        e.stopPropagation();
+        $(this).parent().find(".operation-list").slideToggle(300);
+        $(this).parent().find("input").hide();
+    })
+    $(".modify-comment-btn").on("click",function(e){
+        e.stopPropagation();
+        $(this).parent().parent().find(".new-comment-input").toggle();
+    })
+
+    $(".modify-group-comment-btn").on("click",function(e){
+        e.stopPropagation();
+        $(this).parent().parent().find(".new-group-comment-input").toggle();
+    })
+
+    $(".new-comment-input").keyup(function (event){
+        let self = $(this);
+        let newComment= $(this).val();
+        if(event.keyCode===13){
+            $.ajax({
+                url:'/friend/modify',
+                dataType: 'json',
+                type:"POST",
+                data:{"toModifyFriendNum":$(this).parent().attr("data-Num"),"newComment":newComment},
+                success:function (res){
+                    if(res["flag"]){
+                        let nickName = self.parent().find(".nickname-p").text();
+                        let newTitle = newComment+'('+nickName+')';
+                        self.parent().attr("title",newTitle);
+                        // $(this).parent().attr("title",$(this).val()+$(this).parent().find(".nickname-p").text());
+                        self.parent().find(".link-info").find(".friend-comment-p").text(newComment);
+                        self.toggle(200);
+                    }
+                    else{
+                        alert("服务器内部出错！");
+                    }
+                },
+                error:function (){
+                    alert("与服务器连接失败！");
+                }
+            })
+        }
+    })
+    $(".new-group-comment-input").keyup(function (event){
+        let self = $(this);
+        if(event.keyCode===13){
+            $.ajax({
+                url:'/groupMember/modifyComment',
+                dataType:'json',
+                type:'POST',
+                data:{"groupNum":self.parent().attr("data-Num"),"newGroupComment":self.val()},
+                success:function (res){
+                    if(res["flag"]){
+                        alert("你在本群的昵称成功修改为"+self.val());
+                        self.toggle();
+                    }
+                    else{
+                        alert("服务器内部错误修改失败！");
+                    }
+                },
+                error:function (){
+                    alert("服务器连接失败");
+                }
+            })
+        }
+    })
 })

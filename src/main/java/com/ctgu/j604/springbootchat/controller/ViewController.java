@@ -40,10 +40,10 @@ public class ViewController {
         return modelAndView;
     }
 
-//    @RequestMapping("/register")
-//    public ModelAndView registerHtml(){
-//        ModelAndView modelAndView = new ModelAndView();
-//        modelAndView.setViewName("register");
-//        return  modelAndView;
-//    }
+    @RequestMapping("/registerView")
+    public ModelAndView registerHtml(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("register");
+        return  modelAndView;
+    }
 }

@@ -75,13 +75,13 @@
 <!--               enableSelectByExample="true"-->
 <!--               selectByExampleQueryId="true"-->
 <!--        />-->
-<!--        <table tableName="group_and_user" domainObjectName="GroupAndUser"-->
-<!--               enableCountByExample="true"-->
-<!--               enableUpdateByExample="true"-->
-<!--               enableDeleteByExample="true"-->
-<!--               enableSelectByExample="true"-->
-<!--               selectByExampleQueryId="true"-->
-<!--        />-->
+        <table tableName="group_and_user" domainObjectName="GroupAndUser"
+               enableCountByExample="true"
+               enableUpdateByExample="true"
+               enableDeleteByExample="true"
+               enableSelectByExample="true"
+               selectByExampleQueryId="true"
+        />
 <!--        <table tableName="group_and_member_comment" domainObjectName="GroupAndMemberComment"-->
 <!--               enableCountByExample="true"-->
 <!--               enableUpdateByExample="true"-->
