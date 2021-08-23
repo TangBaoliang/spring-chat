@@ -8,16 +8,12 @@ window.onbeforeunload = function()
 }
 
 //刷新所有图片
-function refreshAllImg(ob){
-    if (ob!==null){
-        ob.src = ob.src+'?time='+new Date().getTime();
-    }
-    else {
-        let imgs = document.getElementsByTagName("img");
-        for (let img of imgs) {
-            img.src = img.src+'?time='+(new Date()).getSeconds();
-        }
-    }
+function refreshAllImg(){
+        $("img").each(function (){
+            let newSrc = this.src+"?"+new Date().getTime();
+            $(this).prop("src",newSrc);
+        })
+        $("#my-chat-head-big").attr("src",myIconSrc+"?"+new Date().getTime());
 }
 
 let myIconSrc = document.getElementById("my-chat-head").src;

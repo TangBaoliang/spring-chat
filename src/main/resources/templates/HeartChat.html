@@ -39,11 +39,9 @@
 
 			<div id="modify-part">
 				<div><img id="my-chat-head-big" th:src="@{'/img/user-icon/'+*{curUser.getUserNum()}+'.jpg'}"></div>
-				<div id="modify-icon-btn">上传头像 <span></span></div>
-				<form action="icon/upload" enctype="multipart/form-data" method="post">
+				<form>
 					<input id="file-input" type="file" name="userIcon">
-
-					<div><input id="icon-submit-btn" type="submit" value="提交"></div>
+					<div><input id="icon-submit-btn" type="button" value="提交"></div>
 					<div class="info-item">昵称：<span th:text="*{curUser.nickName}"></span></div>
 					<div class="info-item">账号：<span th:text="*{curUser.userNum}"></span></div>
 					<div class="info-item">电话号码：<span th:text="*{curUser.phoneNum}"></span></div>
@@ -51,7 +49,6 @@
 					<div class="info-item">性别：<span th:text="*{curUser.sex}"></span></div>
 					<div class="info-item">年龄：<span th:text="*{curUser.age}"></span></div>
 					<div class="info-item">创建时间：<span th:text="*{curUser.createdTime}"></span></div>
-
 				</form>
 			</div>
 		</div>
