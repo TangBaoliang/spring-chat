@@ -12,7 +12,7 @@
 #file-input{
     display: none;
 }
-#my-chat-head-big{
+#my-chat-head-big-box{
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -20,12 +20,12 @@
     position:relative;
     overflow: hidden;
 }
-#my-chat-head-big>img{
+#my-chat-head-big-box>img{
     height: 100%;
     width:100%;
 }
 
-#my-chat-head-big:hover div{
+#my-chat-head-big-box:hover div{
     display: block;
 }
 #head-cover{

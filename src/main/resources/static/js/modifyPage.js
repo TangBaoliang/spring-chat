@@ -74,7 +74,7 @@ $(document).ready(function (){
 
     /**********************************头像上传以及预览*********************************/
     let file = null;
-    $('#my-chat-head-big').on('click', function(event) {
+    $('#my-chat-head-big-box').on('click', function(event) {
         $('#file-input').trigger('click');
         $("#icon-submit-btn").show();
     });
@@ -86,7 +86,7 @@ $(document).ready(function (){
 
         fileReader.readAsDataURL(file);
         fileReader.onload = function(event) {
-            $('#my-chat-head-big').attr('src', event.target.result);
+            $('#my-chat-head-big').prop('src', event.target.result);
         };
 
     });
@@ -103,8 +103,8 @@ $(document).ready(function (){
         if (file == null) {
             alert('请先选择上传的文件');
             return;
-        } else if (file.size > 8056000) {
-            alert('文件超出4MB限制');
+        } else if (file.size > 2056000) {
+            alert('文件超出2MB限制');
             return;
         } else if (!(file.type == 'image/jpg' || file.type == 'image/png' || file.type == 'image/jpeg')) {
             alert('文件类型不正确1');

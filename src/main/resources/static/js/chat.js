@@ -4,7 +4,7 @@ window.onbeforeunload = function()
     //清除sessionStorage值
     sessionStorage.clear();
 
-    refreshAllImg(null);
+    refreshAllImg();
 }
 
 //刷新所有图片
@@ -13,7 +13,7 @@ function refreshAllImg(){
             let newSrc = this.src+"?"+new Date().getTime();
             $(this).prop("src",newSrc);
         })
-        $("#my-chat-head-big").attr("src",myIconSrc+"?"+new Date().getTime());
+        $("#my-chat-head-big").prop("src",myIconSrc+"?"+new Date().getTime());
 }
 
 let myIconSrc = document.getElementById("my-chat-head").src;
