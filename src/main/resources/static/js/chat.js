@@ -15,7 +15,7 @@ function refreshAllImg(){
         })
         $("#my-chat-head-big").prop("src",myIconSrc+"?"+new Date().getTime());
 }
-
+//
 let myIconSrc = document.getElementById("my-chat-head").src;
 let preBubbleBoxSelf = '<div class="bubble-box-self clearfix"><img src="'+myIconSrc+'"> <div class="bubble"><pre>';
 let tailBubbleBox='</pre></div></div>';

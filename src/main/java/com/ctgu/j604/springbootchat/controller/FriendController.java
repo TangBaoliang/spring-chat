@@ -31,6 +31,9 @@ public class FriendController {
     @RequestMapping("/friend/modify")
     public @ResponseBody Result modifyFriend(HttpServletRequest request, String newComment, String toModifyFriendNum){
         TUser tUser = (TUser) request.getSession().getAttribute("curUser");
+//        if(newComment==null && "".equals(newComment)){
+//            newComment = ""
+//        }
         boolean res = false;
         if(tUser != null){
              res = friendService.modifyFriendComment(tUser,toModifyFriendNum,newComment);
