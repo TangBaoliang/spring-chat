@@ -1,3 +1,8 @@
+a{
+    text-decoration: none;
+    color: white;
+}
+
 #modify-part{
     height: 100%;
     width: 449px;
@@ -5,7 +10,7 @@
     left: 55px;
     bottom: 0;
     top: 0;
-    background-color: #5ac68a;
+    background-color: mediumseagreen;
     display: none;
     text-align: center;
 }
@@ -19,8 +24,15 @@
     margin:20px auto;
     position:relative;
     overflow: hidden;
+    background-color: white;
+    text-align: center;
+    line-height: 200px;
+    font-size: 20px;
 }
 #my-chat-head-big-box>img{
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 100%;
     width:100%;
 }
@@ -124,4 +136,25 @@
     margin-right: 10px;
     height: 30px;
     display: none;
+}
+#setting-footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+}
+
+#setting-footer div{
+    width: 50%;
+    height: 100%;
+    margin: 0;
+    float: left;
+    transition: ease 0.5s;
+}
+#setting-footer div:hover{
+    background-color: rgba(66, 231, 134, 0.81);
 }

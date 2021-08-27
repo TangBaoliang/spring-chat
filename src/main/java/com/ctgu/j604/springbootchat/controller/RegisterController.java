@@ -28,14 +28,7 @@ public class RegisterController {
         }
          TUser tUser = registerService.addTUser(registertuser);
        if (null!=tUser){
-                req.getSession().setAttribute("curUserId",tUser.getUserId());
-                req.getSession().setAttribute("userNum",tUser.getUserNum());
-                req.getSession().setAttribute("password",tUser.getPassword());
-//                req.getSession().setAttribute("userNum",tUser.getNickName());
-//                req.getSession().setAttribute("userNum",tUser.getEmail());
-                req.getSession().setAttribute("curUser",tUser);
-//                req.getSession().setAttribute("curUser",tUser);
-//                mv.setViewName("login");
+
                 return new Result(true, "");
             } else {
                 return new Result(false, Result.REPEAT_INFORMATION );

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CTGU自动安全上报</title>
+  <style>
+    strong{
+      color: red;
+    }
+    #container{
+      margin: 0 auto;
+      width: 80%;
+    }
+    form>div{
+      width:100%;
+      height: 40px;
+      margin:10px 0 10px 0;
+    }
+    h1{
+      text-align: center;
+    }
+    .input-container{
+      text-align: center;
+    }
+    input{
+      outline: none;
+      border-radius: 4px;
+      border:1px solid black;
+      width: 300px;
+      height: 40px;
+      box-sizing: border-box;
+    }
+    #cancel{
+      color: white;
+      background-color: red;
+      border:none;
+    }
+    #submit:hover,#cancel:hover{
+      box-shadow: 0 0 4px rgba(128, 128, 128, 0.83);
+    }
+  </style>
+</head>
+
+
+<body>
+<h1>CTGU自动安全上报</h1>
+  <div id="container">
+    <form id="form-luffy">
+      <div class="input-container"><input id="stuNum" autocomplete="new-password" name="stuNum" type="text" placeholder="请输入学号"></div>
+      <div class="input-container"><input id="password" autocomplete="new-password" name="password" type="password" placeholder="请输入密码"></div>
+      <div class="input-container"><input id="submit" type="button" value="提交"></div>
+      <div class="input-container"><input id="cancel" type="button" value="取消自动报平安"></div>
+      <div id="remind-info"></div>
+    </form>
+    <div>温馨提示：</div>
+    <div>1.默认的密码是身份证后六位，最好把密码改成不涉及隐私的密码，否则有可能泄露信息，也不要太简单，容易被别人恶搞取消自动报平安，开发者概不负责 </div>
+    <div>2.默认每日凌晨1点开始上报，密码错误造成上报失败概不负责</div>
+    <div>3.报平安如果有任何问题请通过此网站联系站长</div>
+    <div><strong>切记</strong></div>
+    <div><strong>如果自己真的有不良反应或者感染新冠请及时修改上报信息，此网站默认提交“否”的选择，地址是你最后一次上报的地点</strong></div>
+  </div>
+</body>
+<script src="/js/jquery-3.6.0.js"></script>
+<script>
+    $("#submit").on("click",function(){
+      if($("#stuNum").val()===''||$("#password").val()===''||$("#password").val()===null || $("#stuNum").val()===null){
+        alert("请填写完整信息");
+        return;
+      }
+
+      $.ajax({
+        url:'/ctgu/auto-report',
+        dataType:'json',
+        type:"POST",
+        data:$("#form-luffy").serialize(),
+        success:function (res){
+          if(res["flag"]){
+            alert(res["message"]);
+          }
+          else{
+            alert("提交失败");
+          }
+        },
+        error:function (){
+          alert("提交失败");
+        }
+      })
+    })
+    $("#cancel").on("click",function(){
+      if($("#stuNum").val()===''||$("#password").val()===''||$("#password").val()===null || $("#stuNum").val()===null){
+        alert("请填写完整信息");
+        return;
+      }
+      $.ajax({
+        url:'/ctgu/close-auto-report',
+        dataType:'json',
+        type:"POST",
+        data:$("#form-luffy").serialize(),
+        success:function (res){
+          alert(res["message"]);
+        },
+        error:function (){
+          alert("提交失败");
+        }
+      })
+    })
+</script>
+</html>

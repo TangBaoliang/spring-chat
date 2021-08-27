@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="css/modifyInfoPage.css" type="text/css">
 	<link rel="icon" href="img/chat-icon.png" type="image/x-icon">
 
-	<title>知聊，畅聊心天地</title>
+	<title>猿圈吹牛社区</title>
 	<style>
 		@font-face {
 			font-family: 'icomoon';
@@ -39,6 +39,7 @@
 
 			<div id="modify-part">
 				<div id="my-chat-head-big-box">
+					点击上传头像
 					<img id="my-chat-head-big" th:src="@{'/img/user-icon/'+*{curUser.getUserNum()}+'.jpg'}">
 					<div id="head-cover">点击上传头像</div>
 				</div>
@@ -53,6 +54,12 @@
 					<div class="info-item">年龄：<span th:text="*{curUser.age}"></span></div>
 					<div class="info-item">创建时间：<span th:text="*{curUser.createdTime}"></span></div>
 				</form>
+				<div id="setting-footer">
+					<div id="modify-myinfo">修改信息</div>
+					<a href="/logout">
+						<div>退出登录</div>
+					</a>
+				</div>
 			</div>
 		</div>
 

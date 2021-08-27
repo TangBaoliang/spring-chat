@@ -30,9 +30,6 @@ public class TUserServiceImpl implements TUserService {
         TUserExample.Criteria criteriaNumLogin = tUserExample.or();
         criteriaNumLogin.andUserNumEqualTo(loginUser.getUserNum()).andPasswordEqualTo(loginUser.getPassword());
 
-
-
-
         //匹配电话号码登录
         if(null!=loginUser.getPhoneNum()){
             TUserExample.Criteria criteriaPhoneLogin = tUserExample.or();

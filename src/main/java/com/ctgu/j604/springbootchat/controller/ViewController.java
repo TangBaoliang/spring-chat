@@ -46,4 +46,11 @@ public class ViewController {
         modelAndView.setViewName("register");
         return  modelAndView;
     }
+
+    @RequestMapping("/ctgu")
+    public ModelAndView ctgu(){
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("auto-report-safety");
+        return mv;
+    }
 }
