@@ -24,10 +24,15 @@ public class CTGUController {
             return new Result(false,"小子别乱搞");
         }
         if(!ctguService.autoReportIfExist(autoSafetyMember)){
-            return new Result(ctguService.autoReportAdd(autoSafetyMember),"添加成功！");
+            if(ctguService.autoReportAdd(autoSafetyMember)){
+                return new Result(true,"添加并开启成功！");
+            }
+            else{
+                return new Result(false,"未知原因，开启失败！请联系站长！");
+            }
         }
         else{
-            return new Result(ctguService.autoReportModify(autoSafetyMember),"修改密码成功！");
+            return new Result(false,"此学号已开启过，如果换了密码请先取消自动报平安再添加！");
         }
     }
 
@@ -40,10 +45,10 @@ public class CTGUController {
             return new Result(false,"小子别乱搞");
         }
         if(ctguService.autoReportDelete(autoSafetyMember)){
-            return new Result(true,"取消成功！");
+            return new Result(true,"关闭成功！");
         }
         else{
-            return new Result(false,"取消失败！密码错误或者根本未开启过自动报平安");
+            return new Result(false,"关闭失败！密码错误或者根本未开启过自动报平安");
         }
     }
 }

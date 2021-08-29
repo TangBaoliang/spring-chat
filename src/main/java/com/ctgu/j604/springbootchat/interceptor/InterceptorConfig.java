@@ -18,7 +18,12 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor).addPathPatterns("/main").excludePathPatterns("/login","/register","/");
+        List<String> pathPatterns1 = new LinkedList<>();
+        pathPatterns1.add("/ctgu");
+        pathPatterns1.add("/main");
+        pathPatterns1.add("/ctgu/auto-report");
+        pathPatterns1.add("/ctgu/close-auto-report");
+        registry.addInterceptor(loginInterceptor).addPathPatterns(pathPatterns1).excludePathPatterns("/login","/register","/");
         WebMvcConfigurer.super.addInterceptors(registry);
         List<String> pathPatterns = new LinkedList<>();
         pathPatterns.add("/");

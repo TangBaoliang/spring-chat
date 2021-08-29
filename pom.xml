@@ -104,6 +104,19 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
+
+<!--        邮件服务依赖-->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.5.0-b01</version>
+        </dependency>
+
+<!--        整合Redis依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

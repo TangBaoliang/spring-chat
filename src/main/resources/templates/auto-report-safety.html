@@ -48,8 +48,8 @@
     <form id="form-luffy">
       <div class="input-container"><input id="stuNum" autocomplete="new-password" name="stuNum" type="text" placeholder="请输入学号"></div>
       <div class="input-container"><input id="password" autocomplete="new-password" name="password" type="password" placeholder="请输入密码"></div>
-      <div class="input-container"><input id="submit" type="button" value="提交"></div>
-      <div class="input-container"><input id="cancel" type="button" value="取消自动报平安"></div>
+      <div class="input-container"><input id="submit" type="button" value="开启自动报平安"></div>
+      <div class="input-container"><input id="cancel" type="button" value="关闭自动报平安"></div>
       <div id="remind-info"></div>
     </form>
     <div>温馨提示：</div>
@@ -67,22 +67,23 @@
         alert("请填写完整信息");
         return;
       }
-
+      else if($("#stuNum").val().length!==10){
+        alert("请输入正确的三峡大学学号");
+        return;
+      }
+      $("#submit").val("正在提交...");
       $.ajax({
         url:'/ctgu/auto-report',
         dataType:'json',
         type:"POST",
         data:$("#form-luffy").serialize(),
         success:function (res){
-          if(res["flag"]){
             alert(res["message"]);
-          }
-          else{
-            alert("提交失败");
-          }
+            $("#submit").val("开启自动报平安");
         },
         error:function (){
           alert("提交失败");
+          $("#submit").val("开启自动报平安");
         }
       })
     })
@@ -91,6 +92,11 @@
         alert("请填写完整信息");
         return;
       }
+      else if($("#stuNum").val().length!==10){
+        alert("请输入正确的三峡大学学号");
+        return;
+      }
+      $("#cancel").val("正在关闭...");
       $.ajax({
         url:'/ctgu/close-auto-report',
         dataType:'json',
@@ -98,9 +104,11 @@
         data:$("#form-luffy").serialize(),
         success:function (res){
           alert(res["message"]);
+          $("#cancel").val("关闭自动报平安");
         },
         error:function (){
           alert("提交失败");
+          $("#cancel").val("关闭自动报平安");
         }
       })
     })

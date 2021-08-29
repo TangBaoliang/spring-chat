@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>猿圈注册</title>
     <link rel="icon" href="../static/img/chat-icon.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.css"/>
     <!--CSS RESET-->
@@ -19,7 +19,7 @@
 <body>
 <div class="htmleaf-container">
     <header class="htmleaf-header">
-        <h1>欢迎注册知聊</h1>
+        <h1>欢迎注册猿圈论坛</h1>
 
     </header>
     <div class="demo form-bg">
@@ -135,7 +135,7 @@
                 dataType: "json",
                 success: function (data) {
                     if (data["flag"]) {
-                        alert("注册成功，点击跳往登录界面");
+                        alert("注册成功，点击跳往登录界面使用邮箱登录");
                         window.location.href=rootUrl;
                     } else{
                         $("#remind-info").html(data["message"]);
