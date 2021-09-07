@@ -8,6 +8,7 @@
         <version>2.5.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+<!--    <packaging>war</packaging>-->
     <groupId>com.ctgu.j604</groupId>
     <artifactId>springboot-chat</artifactId>
     <version>0.0.1-SNAPSHOT</version>
