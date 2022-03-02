@@ -1,3 +1,4 @@
+//在tbl中插入
 $("#submit").click(function(){
         $.ajax({
             type: "POST",
