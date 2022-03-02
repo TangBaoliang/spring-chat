@@ -1,4 +1,8 @@
-//合并成功
+<<<<<<< HEAD
+//master中插入的内容
+=======
+//在tbl中插入
+>>>>>>> tbl
 $("#submit").click(function(){
         $.ajax({
             type: "POST",
