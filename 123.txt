@@ -27,7 +27,7 @@ $("#submit").click(function(){
         })
     })
 
-    $("#chatmsg").click(function(){
+    $("我在tbl分支中对该文件做的修改").click(function(){
             $("#systeminfo").hide(300);
             $("#chattingmsg").show(300);
             $(".message-part *").hide(300);
