@@ -160,7 +160,7 @@ $(document).ready(function (){
         let newComment= $(this).val();
         if(event.keyCode===13){
             $.ajax({
-                url:'/friend/modify',
+                url:'friend/modify',
                 dataType: 'json',
                 type:"POST",
                 data:{"toModifyFriendNum":$(this).parent().attr("data-Num"),"newComment":newComment},
@@ -187,7 +187,7 @@ $(document).ready(function (){
         let self = $(this);
         if(event.keyCode===13){
             $.ajax({
-                url:'/groupMember/modifyComment',
+                url:'groupMember/modifyComment',
                 dataType:'json',
                 type:'POST',
                 data:{"groupNum":self.parent().attr("data-Num"),"newGroupComment":self.val()},

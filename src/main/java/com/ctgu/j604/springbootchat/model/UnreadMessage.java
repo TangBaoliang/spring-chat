@@ -1,8 +1,9 @@
 package com.ctgu.j604.springbootchat.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class UnreadMessage {
+public class UnreadMessage implements Serializable {
 
 
     private Integer id;

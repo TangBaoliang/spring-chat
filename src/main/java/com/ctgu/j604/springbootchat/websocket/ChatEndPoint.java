@@ -1,27 +1,17 @@
 package com.ctgu.j604.springbootchat.websocket;
 
-import com.ctgu.j604.springbootchat.SpringbootChatApplication;
+
 import com.ctgu.j604.springbootchat.model.TUser;
 import com.ctgu.j604.springbootchat.service.MessageService;
 import com.ctgu.j604.springbootchat.service.TUserService;
-import com.ctgu.j604.springbootchat.service.impl.MessageServiceImpl;
 import com.ctgu.j604.springbootchat.utils.Message;
-import com.ctgu.j604.springbootchat.utils.MessageUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.ContextLoader;
-
-import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
-import java.io.IOException;
-import java.util.Date;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**

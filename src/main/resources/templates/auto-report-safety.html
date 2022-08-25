@@ -73,7 +73,7 @@
       }
       $("#submit").val("正在提交...");
       $.ajax({
-        url:'/ctgu/auto-report',
+        url:'ctgu/auto-report',
         dataType:'json',
         type:"POST",
         data:$("#form-luffy").serialize(),
@@ -98,7 +98,7 @@
       }
       $("#cancel").val("正在关闭...");
       $.ajax({
-        url:'/ctgu/close-auto-report',
+        url:'ctgu/close-auto-report',
         dataType:'json',
         type:"POST",
         data:$("#form-luffy").serialize(),

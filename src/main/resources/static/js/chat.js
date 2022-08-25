@@ -173,7 +173,7 @@ $(document).ready(function (){
     $("#submit").click(function(){
         $.ajax({
             type: "POST",
-            url: "/search",
+            url: "search",
             data: $("#Search").serialize(),
             dataType: "json",
             success: function(data){
